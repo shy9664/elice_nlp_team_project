@@ -54,3 +54,19 @@ def article(date):
         db.session.delete(diary)
         db.session.commit()
         return jsonify(result='success')
+
+@my_article.route('/<date>/<string:emotion>', methods=['PATCH'])
+def change_emotion(date, emotion):
+    diary = Article.query.filter(Article.date == date).first()
+    diary.emotion = emotion
+    db.session.commit()
+    return jsonify(result='success')
+
+@my_article.route('/<date>/<int:share>', methods=['PATCH'])
+def change_share_status(date, share):
+    diary = Article.query.filter(Article.date == date).first()
+    print(share)
+    print(diary.is_shared)
+    diary.is_shared = share
+    db.session.commit()
+    return jsonify(result='success')
