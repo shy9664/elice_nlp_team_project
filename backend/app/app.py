@@ -16,6 +16,10 @@ def create_app():
     from models.user import User
     from models.article import Article
 
+    from blueprints.article import my_article
+
+    app.register_blueprint(my_article)
+
     return app
 
 if __name__ == '__main__':
