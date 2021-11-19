@@ -35,7 +35,7 @@ export default function RegisterForm({ onSubmit }) {
         </fieldset>
 
         <fieldset>
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">비밀번호</label>
           <input
             required
             ref={passwordRef}
@@ -45,7 +45,7 @@ export default function RegisterForm({ onSubmit }) {
             placeholder="Enter password."
           />
         </fieldset>
-        <button onClick={submitForm}>회원가입!</button>
+        <button onClick={submitForm}>회원가입</button>
       </form>
     </div>
   );

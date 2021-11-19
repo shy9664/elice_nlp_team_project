@@ -44,7 +44,7 @@ export default function LoginForm({ onSubmit }) {
           />
         </fieldset>
         <button type="submit" onClick={submitForm}>
-          
+          로그인
         </button>
       </form>
     </div>
