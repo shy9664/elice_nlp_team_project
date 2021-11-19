@@ -19,7 +19,6 @@ class List extends Component {
         try { 
             const response = await axios.get('http://localhost:4000/board'); 
             this.setState({ 
-                // boards: 'test' 
                 boards: response.data, 
             }); 
         } 
@@ -48,9 +47,6 @@ class List extends Component {
                             />
                         )} 
                     </div>
-                    
-                    {/* {console.log(boards)} */} 
-                    {/* {boards[0].id} */} 
                     {boards.map((item) => { 
                     return ( 
                         <ListItem key={item.id}> 
@@ -62,14 +58,14 @@ class List extends Component {
                         ); 
                         })} 
                         <Button> 
-                        {/* <button onClick={handleClick}>get Request</button> */} 
                         <Link to={`/write`}>글쓰기</Link> 
                         </Button> 
                     </Wrap> 
                             ); 
                         } 
                     } 
-                //styling 
+
+                    
                 const Wrap = styled.div` 
                 padding: 20px; 
                 `; 

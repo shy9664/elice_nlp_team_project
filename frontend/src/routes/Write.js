@@ -15,7 +15,6 @@ class Write extends Component {
             title, 
             content, 
         }); 
-        // alert('전송'); 
         
         this.setState({ 
             title: '', 
@@ -61,7 +60,7 @@ class Write extends Component {
                 ); 
             } 
         } 
-        //styling 
+
         const Wrap = styled.div` 
         padding: 20px; 
         input { 
