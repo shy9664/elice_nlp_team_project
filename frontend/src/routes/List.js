@@ -46,58 +46,59 @@ class List extends Component {
                             rows={7} 
                             value={JSON.stringify(boards, null, 2)} 
                             />
-                             
                         )} 
                     </div>
-                        {/* {console.log(boards)} */} 
-                        {/* {boards[0].id} */} 
-                        {boards.map((item) => { 
-                        return ( 
-                                  <ListItem key={item.id}> 
-                                  <Link to={`/read/${item.id}`}> 
-                                  <h3>{item.title}</h3> 
-                                  <p>{item.content}</p> 
-                                  </Link> 
-                                  </ListItem> 
-                                  ); 
-                                })} 
-                                <Button> 
-                                    {/* <button onClick={handleClick}>get Request</button> */} 
-                                    <Link to={`/write`}>글쓰기</Link> 
-                                    </Button> 
-                                    </Wrap> 
-                                    ); 
-                                } 
-                            } 
-                            //styling 
-                            const Wrap = styled.div` 
-                            padding: 20px; 
-                            `; 
-                            const ListItem = styled.div` 
-                            width: 100%; 
-                            margin-top: 10px; 
-                            padding: 20px; 
-                            border-top: 1px solid #eee; 
-                            a { 
-                                text-decoration: none; 
-                                h3 { margin: 0; padding: 0; color: #212121; } 
-                                p { margin: 0; padding: 10px 0 0 0; color: #787878; } 
-                                &:hover { 
-                                    h3 { 
-                                        color: #0066ff; 
-                                    } 
-                                } 
-                            } 
-                            `; 
-                            const Button = styled.div` 
-                            border-top: 1px solid #eee; 
-                            padding: 20px; 
-                            a { 
-                                float: right; 
-                                padding: 10px 20px; 
-                                border-radius: 5px; 
-                                text-decoration: none; 
-                                background: #212121; 
-                                color: #fff; } 
-                                `; 
+                    
+                    {/* {console.log(boards)} */} 
+                    {/* {boards[0].id} */} 
+                    {boards.map((item) => { 
+                    return ( 
+                        <ListItem key={item.id}> 
+                        <Link to={`/read/${item.id}`}> 
+                        <h3>{item.title}</h3> 
+                        <p>{item.content}</p> 
+                        </Link> 
+                        </ListItem> 
+                        ); 
+                        })} 
+                        <Button> 
+                        {/* <button onClick={handleClick}>get Request</button> */} 
+                        <Link to={`/write`}>글쓰기</Link> 
+                        </Button> 
+                    </Wrap> 
+                            ); 
+                        } 
+                    } 
+                //styling 
+                const Wrap = styled.div` 
+                padding: 20px; 
+                `; 
+                const ListItem = styled.div` 
+                width: 100%; 
+                margin-top: 10px; 
+                padding: 20px; 
+                border-top: 1px solid #eee; 
+                a { 
+                    text-decoration: none; 
+                    h3 { margin: 0; padding: 0; color: #212121; } 
+                    p { margin: 0; padding: 10px 0 0 0; color: #787878; } 
+                    &:hover { 
+                        h3 { 
+                            color: #0066ff; 
+                        } 
+                    } 
+                } 
+                `; 
+                const Button = styled.div` 
+                border-top: 1px solid #eee; 
+                padding: 20px; 
+                a { 
+                    float: right; 
+                    padding: 10px 20px; 
+                    border-radius: 5px; 
+                    text-decoration: none; 
+                    background: #212121; 
+                    color: #fff; 
+                } 
+                `; 
 export default List;
