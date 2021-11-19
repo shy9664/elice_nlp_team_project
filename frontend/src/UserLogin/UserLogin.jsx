@@ -21,9 +21,26 @@ export default function UserLogin() {
         <Route exact path="/login" element={<LoginPage />} />
         <Route exact path="/detail" element={<UserDetailPage />} />
         <Route exact path="/register" element={<RegisterPage />} />
+        <Route exact path="/read" element={<Write />} />
+        <Route exact path="/write" element={<Read />} />
         
       </Routes>
     </BrowserRouter>
+  );
+}
+function Write() {
+  return (
+    <div>
+      글쓰기..가 들어왔어야하는
+    </div>
+  );
+}
+
+function Read() {
+  return (
+    <div>
+      글읽기..가 들어왔어야하는
+    </div>
   );
 }
 
@@ -32,7 +49,9 @@ function HomePage() {
     <div>
       <h2>무드무드무드무드</h2>
       <div>
-      <Link to="login">로그인하러가기!</Link>
+      <Link to="login">로그인하러가기!</Link><br/>
+      <Link to="read">임시글목록</Link><br/>
+      <Link to="write">임시글쓰기</Link>
       </div>
     </div>
   );
