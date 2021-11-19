@@ -17,8 +17,10 @@ def create_app():
     from models.article import Article
 
     from blueprints.article import my_article
+    from blueprints.user import user
 
     app.register_blueprint(my_article)
+    app.register_blueprint(user)
 
     return app
 

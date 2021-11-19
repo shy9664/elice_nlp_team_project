@@ -65,8 +65,6 @@ def change_emotion(date, emotion):
 @my_article.route('/<date>/<int:share>', methods=['PATCH'])
 def change_share_status(date, share):
     diary = Article.query.filter(Article.date == date).first()
-    print(share)
-    print(diary.is_shared)
     diary.is_shared = share
     db.session.commit()
     return jsonify(result='success')
