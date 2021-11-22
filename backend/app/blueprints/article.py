@@ -34,25 +34,25 @@ def create_article():
     db.session.commit()
     return jsonify(result='success')
 
-@my_article.route('/<date>', methods=['GET', 'PATCH', 'DELETE'])
-def article(date):
+@my_article.route('/<date>', methods=['GET'])
+def get_article(date):
+    diary = Article.query.filter(Article.date == date).first()
+    return jsonify(date=diary.date.strftime('%Y-%m-%d'), text=diary.text, emotion=diary.emotion, is_shared=diary.is_shared, is_sharable=diary.is_sharable)
 
-    if request.method == 'GET':
-        diary = Article.query.filter(Article.date == date).first()
-        return jsonify(date=diary.date.strftime('%Y-%m-%d'), text=diary.text, emotion=diary.emotion, is_shared=diary.is_shared, is_sharable=diary.is_sharable)
+@my_article.route('/<date>', methods=['PATCH'])
+def update_article(date):
+    text = request.json['text']
+    diary = Article.query.filter(Article.date == date).first()
+    diary.text = text
+    db.session.commit()
+    return jsonify(result='success')
 
-    elif request.method == 'PATCH':
-        text = request.json['text']
-        diary = Article.query.filter(Article.date == date).first()
-        diary.text = text
-        db.session.commit()
-        return jsonify(result='success')
-
-    else:
-        diary = Article.query.filter(Article.date == date).first()
-        db.session.delete(diary)
-        db.session.commit()
-        return jsonify(result='success')
+@my_article.route('/<date>', methods=['DELETE'])
+def delete_article(date):
+    diary = Article.query.filter(Article.date == date).first()
+    db.session.delete(diary)
+    db.session.commit()
+    return jsonify(result='success')
 
 @my_article.route('/<date>/<string:emotion>', methods=['PATCH'])
 def change_emotion(date, emotion):
