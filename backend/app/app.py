@@ -15,6 +15,7 @@ def create_app():
     migrate.init_app(app, db)
     from models.user import User
     from models.article import Article
+    from models.sympathy import Sympathy
 
     from blueprints.article import my_article
     from blueprints.user import user
