@@ -20,10 +20,12 @@ def create_app():
     from blueprints.article import my_article
     from blueprints.user import user
     from blueprints.main import main
+    from blueprints.board import board
 
     app.register_blueprint(my_article)
     app.register_blueprint(user)
     app.register_blueprint(main)
+    app.register_blueprint(board)
 
     return app
 
