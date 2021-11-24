@@ -7,6 +7,7 @@ import config
 db = SQLAlchemy()
 migrate = Migrate()
 
+
 def create_app():
     app = Flask(__name__)
 
@@ -21,13 +22,18 @@ def create_app():
     from blueprints.user import user
     from blueprints.main import main
     from blueprints.board import board
+    from blueprints.auth.signup import signup
+    from blueprints.auth.login import login
 
     app.register_blueprint(my_article)
     app.register_blueprint(user)
     app.register_blueprint(main)
     app.register_blueprint(board)
+    app.register_blueprint(signup)
+    app.register_blueprint(login)
 
     return app
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     create_app().run(debug=True)
