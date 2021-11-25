@@ -1,9 +1,18 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, session, g
 from models.article import Article
+from models.user import User
 
 from datetime import datetime
 
 main = Blueprint('main', __name__)
+
+@main.before_app_request
+def load_logged_in_user_info():
+    user_id = session.get('login_user_id')
+    if user_id is None:
+        g.user = None
+    else:
+        g.user = User.query.filter(User.id == user_id).first()
 
 @main.route('/main', methods=['GET'])
 def main_info():
@@ -14,9 +23,7 @@ def main_info():
     month = request.args.get('month', month)
     year_month = f'{year}-{month}'
 
-    author_id = 2  # 임시 
-    
-    query = Article.query.filter((Article.author_id == author_id) & Article.date.like(f'{year_month}%')).order_by(Article.date.asc())
+    query = Article.query.filter((Article.author_id == g.user.id) & Article.date.like(f'{year_month}%')).order_by(Article.date.asc())
     year_month_diarys = []
     for diary in query:
         one_diary = {}
