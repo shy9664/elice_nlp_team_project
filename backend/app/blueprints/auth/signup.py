@@ -10,7 +10,7 @@ email_validation = re.compile("^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
 password_validation = re.compile(
     "^.*(?=^.{8,20}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%*^&+=]).*$"
 )
-nickname_validation = re.compile("^[a-zA-Z]+$")
+nickname_validation = re.compile("^[a-zA-Z가-힣0-9]+$")
 
 
 @signup.route("/signup", methods=["POST"])
