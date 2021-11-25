@@ -34,7 +34,7 @@ class Write extends Component {
     render() { 
         return ( 
         <Wrap> 
-            <h2>Write</h2> 
+            <h2>일기쓰기</h2> 
             <p> 
                 <input 
                 type="text" 
@@ -52,8 +52,8 @@ class Write extends Component {
             </p> 
             
             <Button> 
-                <button onClick={this.postBoard}>전송하기 </button> 
-                <Link to="/">목록</Link> 
+                <button onClick={this.postBoard}>글쓰기 </button> 
+                <Link to="/">목록으로</Link> 
             </Button> 
                 <div>{JSON.stringify(this.state)}</div> 
                 </Wrap> 

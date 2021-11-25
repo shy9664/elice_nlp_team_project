@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
+import Write from "../routes/Write";
 
 const users = [];
 
@@ -31,6 +32,11 @@ export default function UserLogin() {
         
         <Route exact path="/register">
             <RegisterPage />
+        </Route>
+
+        <Route exact path="/Write">
+          <Write />
+
         </Route>
         
       </Switch>
@@ -103,6 +109,8 @@ function UserDetailPage() {
         <p>닉네임:{nickname}</p>
       </p>
       <Link to="/">로그아웃</Link>
+      <br />
+      <Link to="/write">글쓰기</Link>
     </div>
   );
 }
