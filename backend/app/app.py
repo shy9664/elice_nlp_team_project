@@ -22,16 +22,28 @@ def create_app():
     from blueprints.article import my_article
     from blueprints.user import user
     from blueprints.main import main
+<<<<<<< HEAD
     from blueprints.board import board
     from blueprints.auth.signup import signup
     from blueprints.auth.login import login
+=======
+    from blueprints.auth.signup import signup
+    from blueprints.auth.login import login
+    from blueprints.board import board
+>>>>>>> feature_back_openboard
 
     app.register_blueprint(my_article)
     app.register_blueprint(user)
     app.register_blueprint(main)
+<<<<<<< HEAD
     app.register_blueprint(board)
     app.register_blueprint(signup)
     app.register_blueprint(login)
+=======
+    app.register_blueprint(signup)
+    app.register_blueprint(login)
+    app.register_blueprint(board)
+>>>>>>> feature_back_openboard
 
     return app
 
