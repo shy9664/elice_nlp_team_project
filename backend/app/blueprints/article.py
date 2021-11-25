@@ -38,6 +38,9 @@ def update_article(date):
     text = request.json['text']
     diary = Article.query.filter((Article.date == date) & (Article.author_id == g.user.id)).first()
     diary.text = text
+
+    # 이 때도 다시 분석해줘야하고, is_sharable값도 바뀔 수 있음. 또한 여기선 is_sharable이 바뀜에 따라 is_shared도 바뀔 수 있음.
+
     db.session.commit()
     return jsonify(result='success')
 

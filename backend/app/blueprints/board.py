@@ -1,34 +1,37 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, session, g
 from models.sympathy import Sympathy
 from models.article import Article
+from models.user import User
 
 from app import db
 
 board = Blueprint('board', __name__, url_prefix='/board')
 
+@board.before_app_request
+def load_logged_in_user_info():
+    user_id = session.get('login_user_id')
+    if user_id is None:
+        g.user = None
+    else:
+        g.user = User.query.filter(User.id == user_id).first()
+
 @board.route('/article/<int:article_id>/<sympathize>', methods=['DELETE'])
 def delete_sympathy(article_id, sympathize):
-    
     if sympathize: 
-        user_id = 2  # 로그인한 유저 식별번호. 임시.
-
-        sympathy_on_diary = Sympathy.query.filter((Sympathy.article_id == article_id) & (Sympathy.user_id == user_id)).first()
+        sympathy_on_diary = Sympathy.query.filter((Sympathy.article_id == article_id) & (Sympathy.user_id == g.user.id)).first()
         db.session.delete(sympathy_on_diary)
         db.session.commit()
         return jsonify(result='success')
 
 @board.route('/sympathy', methods=['GET'])
 def get_sympathized_article():
-
     emotion = request.args.get('emotion')
     if not emotion or emotion == 'all':
         emotion = ['joy', 'anger']  # 추후 감정 추가되는대로 다 집어넣기
     else:
         emotion = [emotion]
 
-    user_id = 2  # 로그인한 유저 식별번호. 임시.
-
-    query = Sympathy.query.filter(Sympathy.user_id == user_id).all()
+    query = Sympathy.query.filter(Sympathy.user_id == g.user.id).all()
     sympathized_articles_id = []
     for article in query:
         sympathized_articles_id.append(article.article_id)
