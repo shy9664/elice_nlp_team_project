@@ -1,2 +1,4 @@
-SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:root@127.0.0.1:3306/nlp_team_project'
+from env import LOCAL_DATABASE_INFO
+
+SQLALCHEMY_DATABASE_URI = f'mysql+pymysql://{LOCAL_DATABASE_INFO}'
 SQLALCHEMY_TRACK_MODIFICATIONS = False
