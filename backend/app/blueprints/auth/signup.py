@@ -22,24 +22,19 @@ def user_signup():
 
     if email == "" or password == "":
         return jsonify(result="KEY_ERROR")
-
     if not email_validation.match(email):
         return jsonify(result="EMAIL_VALIDATION_ERROR")
-
     if not password_validation.match(password) or password != password_check:
         return jsonify(result="PASSWORD_VALIDATION_ERROR")
-
     if not nickname_validation.match(nickname):
         return jsonify(result="NICKNAME_VALIDATION_ERROR")
-
-    user_info = User.query.filter(User.email == email).first()
-    if user_info:
+    if User.query.filter(User.email == email).first():
         return jsonify(result="Registered email")
+    if User.query.filter(User.nickname == nickname).first():
+        return jsonify(result='Registered nickname')
 
     password = generate_password_hash(password)
-
     user = User(email=email, password=password, nickname=nickname)
-
     db.session.add(user)
     db.session.commit()
 
