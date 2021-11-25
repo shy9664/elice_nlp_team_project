@@ -9,17 +9,14 @@ login = Blueprint("login", __name__)
 def user_login():
     email = request.json["email"]
     password = request.json["password"]
+    login_user = User.query.filter(User.email == email).first()
 
-    login_data = User.query.filter(User.email == email).first()
-
-    if not login_data:
+    if not login_user:
         return jsonify(result="Not Registered Email")
-
-    if not check_password_hash(login_data.password, password):
+    if not check_password_hash(login_user.password, password):
         return jsonify(result="Email and Password don't match")
 
     session.clear()
-    session["user_email"] = email
-    session["nickname"] = login_data.nickname
+    session['login_user_id'] = login_user.id
 
-    return jsonify(login_data.photo, login_data.nickname)
+    return jsonify(photo = login_user.photo, nickname = login_user.nickname)
