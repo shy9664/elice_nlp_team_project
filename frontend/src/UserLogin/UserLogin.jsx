@@ -1,14 +1,14 @@
 import React from "react";
 import {
-  Routes,
+  Redirect,
+  Link,
+  Switch,
   BrowserRouter,
   Route,
-  Link,
+  useHistory,
   useLocation,
-  Navigate,
-  useNavigate
 } from "react-router-dom";
-import LoginForm from './LoginForm';
+import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 
 const users = [];
@@ -16,49 +16,41 @@ const users = [];
 export default function UserLogin() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route exact path="/" element={<HomePage />} />
-        <Route exact path="/login" element={<LoginPage />} />
-        <Route exact path="/detail" element={<UserDetailPage />} />
-        <Route exact path="/register" element={<RegisterPage />} />
-        <Route exact path="/read" element={<Write />} />
-        <Route exact path="/write" element={<Read />} />
-        
-      </Routes>
-    </BrowserRouter>
-  );
-}
-function Write() {
-  return (
-    <div>
-      글쓰기..가 들어왔어야하는
-    </div>
-  );
-}
+      <Switch>
+        <Route exact path="/">
+          <HomePage />
+        </Route>
 
-function Read() {
-  return (
-    <div>
-      글읽기..가 들어왔어야하는
-    </div>
+        <Route exact path="/login">
+          <LoginPage />
+        </Route>
+
+        <Route exact path="/detail">
+          <UserDetailPage />
+        </Route>
+        
+        <Route exact path="/register">
+            <RegisterPage />
+        </Route>
+        
+      </Switch>
+    </BrowserRouter>
   );
 }
 
 function HomePage() {
   return (
     <div>
-      <h2>무드무드무드무드</h2>
+      <h2>무드무드 메인</h2>
       <div>
-      <Link to="login">로그인하러가기!</Link><br/>
-      <Link to="read">임시글목록</Link><br/>
-      <Link to="write">임시글쓰기</Link>
+        <Link to="/login">로그인</Link>
       </div>
     </div>
   );
 }
 
 function LoginPage() {
-  const history = useNavigate()
+  const history = useHistory()
   
   const handleSubmit = (formData) => {
     const foundUser = users.find(user => user.email === formData.email && user.password === formData.password)
@@ -86,37 +78,33 @@ function LoginPage() {
   );
 }
 
-
-
 function UserDetailPage() {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
 
-  const location = useLocation()
-  const searchParams = new URLSearchParams(location.search)
-  
-  
-  const email = searchParams.get('email')
-  const password = searchParams.get('password')
-  
+  const email = searchParams.get("email");
+  const password = searchParams.get("password");
+
   if (!email || !password) {
-    return <Navigate to="/login" />
+    return <Redirect to="/login" />;
   }
-  
+
   return (
     <div>
-      <h2>유저 정보 페이지</h2>
+      <h2>유저 페이지</h2>
       <p>
         <h3>유저 정보</h3>
-        <em>{email}</em>
+        <em>이메일:{email}</em>
         <br />
-        <strong>{password}</strong>
+        <strong>비밀번호:{password}</strong>
       </p>
-        <Link to="/">로그아웃</Link>
+      <Link to="/">로그아웃</Link>
     </div>
   );
 }
 
 function RegisterPage() {
-  const history = useNavigate();
+  const history = useHistory();
 
   const handleSubmit = (formData) => {
     users.push(formData);

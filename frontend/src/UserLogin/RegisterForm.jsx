@@ -22,7 +22,7 @@ export default function RegisterForm({ onSubmit }) {
     <div>
       <form>
         <fieldset>
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">이메일</label>
           <input
             placeholder="Enter email."
             required

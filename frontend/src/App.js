@@ -1,4 +1,4 @@
-import React, { useState, Component } from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import Navigation from './components/nav';
 import UserLogin from './UserLogin/UserLogin'
@@ -9,29 +9,15 @@ import { Route } from 'react-router';
 import axios from 'axios';
 
 function App() {
-  const [data, setData] = useState(null);
-  const onClick = () => {
-    axios
-      .get('https://jsonplaceholder.typicode.com/todos/1')
-      .then((response) => {
-        setData(response.data);
-      });
-  };
   return (
-    <div>
-      <div>
-        <button onClick={onClick}>test</button>
-      </div>
-
-      {data && (
-        <textarea
-          rows={7}
-          value={JSON.stringify(data, null, 2)}
-          readOnly={true}
-        />
-      )}
+    <div className="App">
+      <Navigation />
+      <UserLogin />
     </div>
   );
 }
 
 export default App;
+
+
+
