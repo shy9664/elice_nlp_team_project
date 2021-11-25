@@ -26,11 +26,10 @@ def create_article():
     emotion = 'joy'
     is_sharable = False 
     
-    author = 'test'  # 테스트를 위해 임시로. 
-    author_id = 2  # 테스트를 위해 임시로.
+    author = 'test' # 테스트를 위해 임시로. 
     
     is_shared = False  # 처음 작성 시 default는 비공개
-    new_diary = Article(author, author_id, text, date, emotion, is_sharable, is_shared)
+    new_diary = Article(author, text, date, emotion, is_sharable, is_shared)
     db.session.add(new_diary)
     db.session.commit()
     return jsonify(result='success')
@@ -81,7 +80,7 @@ def get_my_diarys():
     sort = request.args.get('sort', 0, type=int)
     sort = Article.date.asc() if sort else Article.date.desc()
     
-    author_id = 2  # 임시 
+    author_id = None  # 임시 
 
     query = Article.query.filter((Article.author_id == author_id) & (Article.emotion.in_(emotion)) & (Article.is_shared.in_(share_status))).order_by(sort)
     my_diarys = []
