@@ -25,6 +25,7 @@ def create_app():
     from blueprints.board import board
     from blueprints.auth.signup import signup
     from blueprints.auth.login import login
+    from blueprints.auth.logout import logout
 
     app.register_blueprint(my_article)
     app.register_blueprint(user)
@@ -32,6 +33,7 @@ def create_app():
     app.register_blueprint(board)
     app.register_blueprint(signup)
     app.register_blueprint(login)
+    app.register_blueprint(logout)
 
     return app
 
