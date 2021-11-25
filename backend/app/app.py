@@ -3,6 +3,7 @@ from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
 import config
+from env import secret_key
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -10,6 +11,7 @@ migrate = Migrate()
 
 def create_app():
     app = Flask(__name__)
+    app.secret_key = secret_key
 
     app.config.from_object(config)
     db.init_app(app)
@@ -21,16 +23,16 @@ def create_app():
     from blueprints.article import my_article
     from blueprints.user import user
     from blueprints.main import main
+    from blueprints.board import board
     from blueprints.auth.signup import signup
     from blueprints.auth.login import login
-    from blueprints.board import board
 
     app.register_blueprint(my_article)
     app.register_blueprint(user)
     app.register_blueprint(main)
+    app.register_blueprint(board)
     app.register_blueprint(signup)
     app.register_blueprint(login)
-    app.register_blueprint(board)
 
     return app
 
