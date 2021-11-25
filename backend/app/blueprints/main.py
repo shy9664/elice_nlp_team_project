@@ -14,7 +14,7 @@ def main_info():
     month = request.args.get('month', month)
     year_month = f'{year}-{month}'
 
-    author_id = 2  # 임시 
+    author_id = None  # 임시 
     
     query = Article.query.filter((Article.author_id == author_id) & Article.date.like(f'{year_month}%')).order_by(Article.date.asc())
     year_month_diarys = []
