@@ -53,10 +53,10 @@ function LoginPage() {
   const history = useHistory()
   
   const handleSubmit = (formData) => {
-    const foundUser = users.find(user => user.email === formData.email && user.password === formData.password)
+    const foundUser = users.find(user => user.email === formData.email && user.password === formData.password && user.nickname === formData.nickname)
     
     if (!foundUser) return
-    history.push(`/detail?email=${formData.email}&password=${formData.password}`)
+    history.push(`/detail?email=${formData.email}&password=${formData.password}&password2=${formData.password2}&nickname=${formData.nickname}`)
   }
   
   return (
@@ -84,6 +84,8 @@ function UserDetailPage() {
 
   const email = searchParams.get("email");
   const password = searchParams.get("password");
+  const nickname = searchParams.get("nickmane");
+  const password2 = searchParams.get("password2");
 
   if (!email || !password) {
     return <Redirect to="/login" />;
@@ -96,7 +98,9 @@ function UserDetailPage() {
         <h3>유저 정보</h3>
         <em>이메일:{email}</em>
         <br />
-        <strong>비밀번호:{password}</strong>
+        <strong>비밀번호:{password}</strong> <br />
+        <strong>비밀번호 확인:{password2}</strong> <br />
+        <p>닉네임:{nickname}</p>
       </p>
       <Link to="/">로그아웃</Link>
     </div>
