@@ -52,7 +52,7 @@ class Read extends Component {
                 ); 
             } 
         } 
-        //styling 
+        
         const Wrap = styled.div` 
         padding: 20px; 
         h2 { 

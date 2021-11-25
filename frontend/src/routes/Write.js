@@ -1,7 +1,8 @@
 import React, { Component } from 'react'; 
 import { Link } from 'react-router-dom'; 
 import axios from 'axios'; 
-import styled from 'styled-components'; 
+import styled from 'styled-components';
+
 
 class Write extends Component { 
     state = { 
@@ -53,7 +54,8 @@ class Write extends Component {
             
             <Button> 
                 <button onClick={this.postBoard}>글쓰기 </button> 
-                <Link to="/">목록으로</Link> 
+                <Link to="/list">목록</Link>
+                
             </Button> 
                 <div>{JSON.stringify(this.state)}</div> 
                 </Wrap> 
@@ -102,4 +104,5 @@ class Write extends Component {
         } 
         `; 
 
-         export default Write;
+
+        export default Write;
