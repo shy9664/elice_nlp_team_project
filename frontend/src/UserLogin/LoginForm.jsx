@@ -1,8 +1,12 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 export default function LoginForm({ onSubmit }) {
   const emailRef = useRef();
   const passwordRef = useRef();
+  /*
+  const password2Ref = useRef();
+ const nickmaneRef = useRef();
+*/
 
   const submitForm = (e) => {
     e.preventDefault();

@@ -10,7 +10,8 @@ import {
 } from "react-router-dom";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
-import ListPage from "../Pages/ListPage";
+import ListPage from "../pages/ListPage";
+import WritePage from "../pages/WritePage";
 
 
 const users = [];
@@ -38,6 +39,10 @@ export default function UserLogin() {
         <Route exact path="/list">
           <ListPage />
         </Route>
+
+        <Route exact path="/write">
+          <WritePage />
+        </Route>
         
       </Switch>
     </BrowserRouter>
@@ -62,7 +67,7 @@ function LoginPage() {
     const foundUser = users.find(user => user.email === formData.email && user.password === formData.password && user.nickname === formData.nickname)
     
     if (!foundUser) return
-    history.push(`/detail?email=${formData.email}&password=${formData.password}&password2=${formData.password2}&nickname=${formData.nickname}`)
+    history.push(`/detail?email=${formData.email}&password=${formData.password}`)
   }
   
   return (
