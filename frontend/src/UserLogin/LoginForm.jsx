@@ -1,10 +1,14 @@
 import React, { useRef } from "react";
+import login from "../apis/login";
+import { useHistory } from "react-router";
 
 export default function LoginForm({ onSubmit }) {
   const emailRef = useRef();
   const passwordRef = useRef();
 
-  const submitForm = (e) => {
+  const history = useHistory();
+
+  const submitForm = async (e) => {
     e.preventDefault();
 
     const email = emailRef.current.value;
@@ -14,7 +18,11 @@ export default function LoginForm({ onSubmit }) {
       password,
     };
 
-    onSubmit(formData);
+    const loggedInUserInfo = await login(formData);
+    window.sessionStorage.setItem('loggedInUserNickname', loggedInUserInfo.nickname)
+    window.sessionStorage.setItem('loggedInUserPhoto', loggedInUserInfo.photo)
+
+    history.push('/main')
   };
 
   return (
