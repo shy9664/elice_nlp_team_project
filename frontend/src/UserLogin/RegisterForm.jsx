@@ -19,7 +19,7 @@ export default function RegisterForm({ onSubmit }) {
       email,
       password,
       password_check: password,  // 임시
-      nickname: 'nick'  // 임시. unique한 값이므로 테스트할 때 매번 변경해줘야함 
+      nickname: '123'  // 임시. unique한 값이므로 테스트할 때 매번 변경해줘야함 
     };
 
     signup(formData);
