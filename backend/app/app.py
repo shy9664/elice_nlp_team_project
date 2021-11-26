@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 
 import config
 from env import secret_key
@@ -35,8 +36,8 @@ def create_app():
     app.register_blueprint(login)
     app.register_blueprint(logout)
 
+    CORS(app, supports_credentials=True)
     return app
-
 
 if __name__ == "__main__":
     create_app().run(debug=True)

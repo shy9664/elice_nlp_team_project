@@ -1,27 +1,29 @@
 import React, { useRef, useState } from "react";
-
+import signup from "../apis/signup";
+import { useHistory } from "react-router";
 
 
 export default function RegisterForm({ onSubmit }) {
   const emailRef = useRef();
   const passwordRef = useRef();
   
+  const history = useHistory()
 
   const submitForm = (e) => {
     e.preventDefault();
 
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
-   
-    
 
     const formData = {
       email,
       password,
-     
+      password_check: password,  // 임시
+      nickname: 'nick'  // 임시. unique한 값이므로 테스트할 때 매번 변경해줘야함 
     };
 
-    onSubmit(formData);
+    signup(formData);
+    history.push('/login')
   };
 
   return (
@@ -40,8 +42,6 @@ export default function RegisterForm({ onSubmit }) {
             placeholder="이메일을 입력해주세요."
           />
         </fieldset>
-        
-        
         <fieldset>
           <label htmlFor="password">비밀번호</label>
           <input
@@ -53,12 +53,6 @@ export default function RegisterForm({ onSubmit }) {
             placeholder="아니면 밑에 작게 글씨 뜨는게 나을까요??"
           />
         </fieldset>
-
-      
-
-        
-
-        
 
         <button onClick={submitForm}>회원가입</button>
       </form>
