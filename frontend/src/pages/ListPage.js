@@ -40,7 +40,7 @@ const ListPage = () => {
 
   return (
     <div>
-      <h1>일기쓰기</h1>
+      <h1>일기 보기</h1>
       <form onSubmit={handleWrite}>
         <input
           type='text'
@@ -67,7 +67,7 @@ const ListPage = () => {
           <button onClick={() => handleDelete(post.id)}>삭제</button>
         </Box1>
       ))}
-        <Link to="/">
+        <Link to="/write">
             <button>더 쓰러 갈래!</button>
         </Link>
       <button>다른 일기 보기</button>
@@ -87,4 +87,3 @@ const Box1 = styled.div`
 `;
 
 export default ListPage;
-

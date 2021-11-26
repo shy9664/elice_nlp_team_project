@@ -10,7 +10,7 @@ import {
 } from "react-router-dom";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
-import ListPage from "../pages/ListPage";
+import ListPage from "../Pages/ListPage";
 
 
 const users = [];
