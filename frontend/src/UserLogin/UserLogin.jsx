@@ -12,6 +12,8 @@ import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import ListPage from "../pages/ListPage";
 import WritePage from "../pages/WritePage";
+import './login.css'
+
 
 
 const users = [];
@@ -129,6 +131,7 @@ function RegisterPage() {
   };
 
   return (
+    
     <div>
       <h2>회원가입 페이지</h2>
       <RegisterForm onSubmit={handleSubmit} />
@@ -144,5 +147,6 @@ function RegisterPage() {
         </ul>
       </div>
     </div>
+    
   );
 }

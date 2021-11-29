@@ -1,4 +1,6 @@
 import React, { useRef, useState } from "react";
+import './login.css'
+
 
 export default function LoginForm({ onSubmit }) {
   const emailRef = useRef();
@@ -24,7 +26,7 @@ export default function LoginForm({ onSubmit }) {
   return (
     <div>
       <form>
-        <fieldset>
+        <fieldset className="box1">
           <label htmlFor="email">이메일</label>
           <input
             placeholder="메일을 입력해주세요."

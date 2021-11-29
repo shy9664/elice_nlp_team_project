@@ -33,10 +33,7 @@ const ListPage = () => {
     });
   };
 
-  // 삭제
-  const handleDelete = (id) => {
-    setPosts(posts.filter((post) => post.id !== id));
-  };
+  
 
   return (
     <div>
@@ -64,7 +61,7 @@ const ListPage = () => {
           <div>
             날짜? : {post.id} / 제목 : {post.title} / 내용 : {post.content}
           </div>
-          <button onClick={() => handleDelete(post.id)}>삭제</button>
+          
         </Box1>
       ))}
         <Link to="/write">
