@@ -1,10 +1,14 @@
 import React, { useRef } from "react";
+import login from "../apis/login";
+import { useHistory } from "react-router";
 
 export default function LoginForm({ onSubmit }) {
   const emailRef = useRef();
   const passwordRef = useRef();
 
-  const submitForm = (e) => {
+  const history = useHistory();
+
+  const submitForm = async (e) => {
     e.preventDefault();
 
     const email = emailRef.current.value;
@@ -14,16 +18,20 @@ export default function LoginForm({ onSubmit }) {
       password,
     };
 
-    onSubmit(formData);
+    const loggedInUserInfo = await login(formData);
+    window.sessionStorage.setItem('loggedInUserNickname', loggedInUserInfo.nickname)
+    window.sessionStorage.setItem('loggedInUserPhoto', loggedInUserInfo.photo)
+
+    history.push('/main')
   };
 
   return (
     <div>
       <form>
         <fieldset>
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">이메일</label>
           <input
-            placeholder="Enter email."
+            placeholder="메일을 입력해주세요."
             required
             ref={emailRef}
             id="email"
@@ -33,14 +41,14 @@ export default function LoginForm({ onSubmit }) {
           />
         </fieldset>
         <fieldset>
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">비밀번호</label>
           <input
             required
             ref={passwordRef}
             id="password"
             type="password"
             name="password"
-            placeholder="Enter password."
+            placeholder="비밀번호를 입력해주세요."
           />
         </fieldset>
         <button type="submit" onClick={submitForm}>

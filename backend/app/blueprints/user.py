@@ -1,29 +1,51 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, session, g
+from werkzeug.security import generate_password_hash
 from models.user import User
 
 from datetime import datetime
 from hashlib import sha256
+import re
 
 from app import db
 
 user = Blueprint('user', __name__)
 
+password_validation = re.compile("^.*(?=^.{8,20}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%*^&+=]).*$")
+nickname_validation = re.compile("^[a-zA-Z가-힣0-9]+$")
+
+@user.before_app_request
+def load_logged_in_user_info():
+    user_id = session.get('login_user_id')
+    if user_id is None:
+        g.user = None
+    else:
+        g.user = User.query.filter(User.id == user_id).first()
+
 @user.route('/user', methods=['GET'])
 def get_user_info():
-    '''
-    로그인 구현 시, 세션이나 access_token에 저장된 것으로 
-    로그인한 유저를 특정할 수 있는 값으로 로그인 유저에 대한 정보 가져오도록 변경 
-    '''
-    email = 'test'  # 임시. 로그인한 유저.
-    user = User.query.filter(User.email == email).first()
+    user = User.query.filter(User.id == g.user.id).first()
     return jsonify(photo = user.photo, email = user.email, nickname = user.nickname)
 
 @user.route('/user', methods=['PATCH'])
 def update_user_info():
     photo = request.form['photo'] if request.form['photo'] else None  # 추후 파일로 받게되면 request.files['photo'], request.files 로 변경
     password = request.form['password']
-    email = 'test'  # 임시. 로그인한 유저.
-    user = User.query.filter(User.email == email).first()
+    password_check = request.form['password_check']
+    nickname = request.form.get('nickname')
+
+    user = User.query.filter(User.id == g.user.id).first()
+
+    if not password_validation.match(password) or password != password_check:
+        return jsonify(result="PASSWORD_VALIDATION_ERROR")
+    password = generate_password_hash(password)
+    user.password = password 
+    if nickname:
+        if not nickname_validation.match(nickname):
+            return jsonify(result="NICKNAME_VALIDATION_ERROR")
+        if User.query.filter(User.nickname == nickname).first():
+            return jsonify(result='Registered nickname')
+        user.nickname = nickname
+
     '''
     파일로 받게될 시 기존 if photo문 지우고, 이걸로 대체. 서버(static/uploads/)에 파일 저장. 
     if photo:
@@ -41,6 +63,6 @@ def update_user_info():
         hashed_photo_filename = m.hexdigest()+'.jpg'
         photo_location = 'static/uploads/' + hashed_photo_filename
     user.photo = '../' + photo_location if photo else None
-    user.password = password 
+
     db.session.commit()
     return jsonify(result='success')
