@@ -48,14 +48,14 @@ const ListPage = () => {
           onChange={handleForm}
           name='title'
         />
-        <input
+        {/* <input
           type='text'
           placeholder='내용'
           value={post.content}
           onChange={handleForm}
           name='content'
         />
-        <button type='submit'>간단일기쓰기</button>
+        <button type='submit'>간단일기쓰기</button> */}
       </form>
       <hr />
       
