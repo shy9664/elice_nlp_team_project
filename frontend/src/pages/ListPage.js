@@ -1,9 +1,11 @@
+//page 5 글목록 페이지, 사이드바 추가, 드롭다운 감정선택, 체크박스
+
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import { Link, withRouter } from "react-router-dom";
+import styled from 'styled-components';
 
 
-//캘린더 라이브러리? 간단쓰기 제목 없애는게 나을까요
+//임시 간단쓰기
 
 const ListPage = () => {
   const [post, setPost] = useState({
@@ -56,14 +58,17 @@ const ListPage = () => {
         <button type='submit'>간단일기쓰기</button>
       </form>
       <hr />
+      
       {posts.map((post) => (
         <Box1>
+        <Link to="/read">
           <div>
             날짜? : {post.id} / 제목 : {post.title} / 내용 : {post.content}
           </div>
-          
+        </Link>
         </Box1>
       ))}
+      
         <Link to="/write">
             <button>더 쓰러 갈래!</button>
         </Link>

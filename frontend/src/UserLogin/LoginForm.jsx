@@ -5,10 +5,10 @@ import './login.css'
 export default function LoginForm({ onSubmit }) {
   const emailRef = useRef();
   const passwordRef = useRef();
-  /*
-  const password2Ref = useRef();
- const nickmaneRef = useRef();
-*/
+// //
+//   const password2Ref = useRef();
+//  const nickmaneRef = useRef();
+
 
   const submitForm = (e) => {
     e.preventDefault();

@@ -12,7 +12,11 @@ import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import ListPage from "../pages/ListPage";
 import WritePage from "../pages/WritePage";
+import ReadPage from "../pages/ReadPage";
+import MainPage from "../pages/MainPage";
+
 import './login.css'
+
 
 
 
@@ -45,7 +49,16 @@ export default function UserLogin() {
         <Route exact path="/write">
           <WritePage />
         </Route>
+
+        <Route exact path="/read">
+          <ReadPage />
+        </Route>
         
+        <Route exact path="/main">
+          <MainPage />
+        </Route>
+        
+
       </Switch>
     </BrowserRouter>
   );
@@ -66,7 +79,7 @@ function LoginPage() {
   const history = useHistory()
   
   const handleSubmit = (formData) => {
-    const foundUser = users.find(user => user.email === formData.email && user.password === formData.password && user.nickname === formData.nickname)
+    const foundUser = users.find(user => user.email === formData.email && user.password === formData.password)
     
     if (!foundUser) return
     history.push(`/detail?email=${formData.email}&password=${formData.password}`)
@@ -118,6 +131,8 @@ function UserDetailPage() {
       <Link to="/">로그아웃</Link>
       <br />
       <Link to="/list">글쓰기</Link>
+      <br />
+      <Link to="/main">유저메인</Link>
     </div>
   );
 }
