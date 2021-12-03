@@ -38,7 +38,20 @@ export default function UserLogin() {
         <Route exact path="/list">
           <ListPage />
         </Route>
+
+        <Route exact path="/write">
+          <WritePage />
+        </Route>
+
+        <Route exact path="/read">
+          <ReadPage />
+        </Route>
         
+        <Route exact path="/main">
+          <MainPage />
+        </Route>
+        
+
       </Switch>
     </BrowserRouter>
   );
@@ -59,10 +72,10 @@ function LoginPage() {
   const history = useHistory()
   
   const handleSubmit = (formData) => {
-    const foundUser = users.find(user => user.email === formData.email && user.password === formData.password && user.nickname === formData.nickname)
+    const foundUser = users.find(user => user.email === formData.email && user.password === formData.password)
     
     if (!foundUser) return
-    history.push(`/detail?email=${formData.email}&password=${formData.password}&password2=${formData.password2}&nickname=${formData.nickname}`)
+    history.push(`/detail?email=${formData.email}&password=${formData.password}`)
   }
   
   return (
@@ -111,6 +124,8 @@ function UserDetailPage() {
       <Link to="/">로그아웃</Link>
       <br />
       <Link to="/list">글쓰기</Link>
+      <br />
+      <Link to="/main">유저메인</Link>
     </div>
   );
 }
@@ -124,6 +139,7 @@ function RegisterPage() {
   };
 
   return (
+    
     <div>
       <h2>회원가입 페이지</h2>
       <RegisterForm onSubmit={handleSubmit} />
@@ -139,5 +155,6 @@ function RegisterPage() {
         </ul>
       </div>
     </div>
+    
   );
 }
