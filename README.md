@@ -1,15 +1,30 @@
-# (서비스 명)
-- 최종 서비스 명을 위 괄호 부분에 작성하세요.
-- 최종 서비스의 한 줄 소개를 작성하세요.
+<div align=center>
+  <h1> MOODMOOD </h1>
+  <img src="https://drive.google.com/file/d/1r9rbPyo0JyUa5u8OLdwADg2cj512QFaM/view?usp=sharing" 
+       style="padding: 0;margin:0;">
+  <h6>"행복은 두 배로, 슬픔은 반으로"</h6>
 
 
-## 프로젝트 구성 안내
-
-* `bullet point 에 적힌 내용을 수정해 주시면 됩니다.`
-
-* `초기 기획은 언제든 수정될 수 있으니 웹서비스 결과를 내는데 초점을 두시기 바랍니다.`
+</div>
 
 ## 1. 프로젝트 소개
+01. Used DataSets
+    > AI허브 : "한국어 감정 정보가 포함된 단발성 대화 데이터셋"<br>
+      욕설데이터셋
+
+02. AI Model
+    | aaa | bbb | ccc |
+    |  남정윤   |	인공지능, 팀장  |  
+    |  권순빈   |   인공지능    |
+
+
+03. Skills
+    > ![python](https://img.shields.io/badge/python-3.6|3.7-blue), ![ubuntu](https://img.shields.io/badge/ubuntu-16.04-orange), ![jupyter](https://img.shields.io/badge/jupyter-orange), ![colab](https://img.shields.io/badge/google-colab-orange), ![d3](https://img.shields.io/badge/d3-yellow), ![MySQL](https://img.shields.io/badge/MySQL-002b8a), ![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-63009e), ![JavaScript](https://img.shields.io/badge/-JavaScript-yellow)
+
+04. Library
+    > ![pandas](https://img.shields.io/badge/pandas-25b72d), 
+    ![numpy](https://img.shields.io/badge/numpy-209d8d),
+    ![scipy](https://img.shields.io/badge/scipy-interpolate-d63f38),
 
 **어떠한 인공지능 모델과 알고리즘을 사용했는지에 대한 설명과 엔드유저에게 보이는 웹서비스에 대한 소개**
 
@@ -33,43 +48,20 @@
   - 프로젝트만의 차별점, 기대 효과
 
 ## 4. 프로젝트 구성도
-  - 와이어프레임/스토리보드 추가
+  - [와이어프레임](https://www.figma.com/file/fVKhM58EkIDBi7BJebwkBp/MOODMOOD?node-id=0%3A1)
+  - [스토리보드](https://docs.google.com/presentation/d/1DTDAZEgTwaf5CVYe-uQtZbqBPVOKa0wAzedMZz1HV6s/edit?usp=sharing)
 
 ## 5. 프로젝트 팀원 역할 분담
-| 이름 | 담당 업무 |
+| 이름 | 역할 |
 | ------ | ------ |
-| 멤버1 | 팀장/프론트엔드 개발 |
-| 멤버2 | 백엔드 개발/인공지능 |
-
-**멤버별 responsibility**
-
-1. 팀장
-
-- 기획 단계: 구체적인 설계와 지표에 따른 프로젝트 제안서 작성
-- 개발 단계: 팀원간의 일정 등 조율 + 프론트 or 백엔드 or 인공지능 개발
-- 수정 단계: 기획, 스크럼 진행, 코치님 피드백 반영해서 수정, 발표 준비
-
-2. 프론트엔드
-
-- 기획 단계: 큰 주제에서 문제 해결 아이디어 도출, 와이어프레임 작성
-- 개발 단계: 와이어프레임을 기반으로 구현, 인공지능 학습 결과 시각화 담당, UI 디자인 완성
-- 수정 단계: 코치님 피드백 반영해서 프론트 디자인 수정
-
-3. 백엔드
-
-- 기획 단계: 데이터셋을 확보하기 위한 데이터베이스 구축, 데이터셋 수집
-- 개발 단계: 데이터 베이스 구축 및 API 활용, 웹서비스 사용자의 정보 수집 기능 구현, 인공지능 학습 결과를 활용한 기능 구현
-- 수정 단계: 코치님 피드백 반영해서 백엔드 설계/기능 수정
-
-4. 인공지능
-
-- 기획 단계: 웹 서비스 프로젝트 주제에 맞는 모델 및 알고리즘 설정, 모델과 알고리즘에 적합한 데이터셋 수집
-- 개발 단계: 데이터 전처리, 학습 모델 구현, 학습 데이터 가공 및 모델 정밀도 향상
-- 수정 단계: 코치님 피드백 반영해서 인공지능 학습 방식 수정
-
+|  남정윤   |	인공지능, 팀장  |  
+|  권순빈   |   인공지능    |
+|  박소현   |	프론트엔드  |
+|  신호연   |	백엔드  |
+|  문성권   |	백엔드  |
 
 ## 6. 버전
-  - 프로젝트의 버전 기입
+  - v1.0.0
 
 ## 7. FAQ
   - 자주 받는 질문 정리
