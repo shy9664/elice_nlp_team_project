@@ -1,8 +1,14 @@
+
+<br><br><br>
+
 <div align=center>
   <img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/4bc2119e-95a4-44b8-8114-c0494fa9a62f/moodmood.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20211204%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20211204T105241Z&X-Amz-Expires=86400&X-Amz-Signature=b647d3d5c9a06ec6743ff2d80dd635e492132064e2926dea0acf2e0edf9af556&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22moodmood.png%22&x-id=GetObject" width=70% height=70%>
+  <br>
   <h4>"행복은 두 배로, 슬픔은 반으로"</h4>
 
 </div>
+
+<br><br><br>
 
 ## 1. 프로젝트 소개
 01. Used DataSets
