@@ -1,65 +1,49 @@
 import React from "react";
-import { useRecoilState } from "recoil";
-import { photo as ptatom, nickname as nkatom } from "../recoils/userInfo";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
 import Logo from "./Logo";
 import { useNavigate } from "react-router";
-import { Typography } from "@mui/material";
+import { useTheme } from "@mui/material";
 
 const AppHeader = () => {
     const navi = useNavigate();
-    const [nickname, setNickname] = useRecoilState(nkatom);
-    const [photo, setPhoto] = useRecoilState(ptatom);
-    const logout = () => {
-        console.log("로그아웃되었습니다.");
-        localStorage.clear();
-        setNickname("");
-        setPhoto("");
-        setTimeout(() => {
-            navi("/signin");
-        }, 500);
-    };
+
+    const theme = useTheme();
     return (
         <AppBar sx={{ position: "sticky" }}>
             <Toolbar
                 sx={{
                     display: "flex",
                     alignItems: "center",
-                    justifyContent: "space-between",
+                    justifyContent: "center",
+                    mr: 2,
                 }}
             >
-                <Button
-                    variant="contained"
+                <Box
                     sx={{
-                        width: 150,
+                        width: "100%",
                         display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        backgroundColor: "white",
-                    }}
-                    onClick={() => {
-                        navi("/");
+                        maxWidth:
+                            1200 - Number(theme.spacing(8).replace(/px/, "")),
+                        justifyContent: "space-between",
                     }}
                 >
-                    <Logo />
-                </Button>
-                <Box>
                     <Button
-                        sx={{ mr: 1 }}
                         variant="contained"
-                        color="secondary"
+                        sx={{
+                            width: 150,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            backgroundColor: "white",
+                        }}
+                        onClick={() => {
+                            navi("/");
+                        }}
                     >
-                        <Typography>내 정보</Typography>
-                    </Button>
-                    <Button
-                        onClick={() => logout()}
-                        variant="contained"
-                        color="secondary"
-                    >
-                        <Typography>로그아웃</Typography>
+                        <Logo />
                     </Button>
                 </Box>
             </Toolbar>

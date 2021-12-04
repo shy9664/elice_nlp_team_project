@@ -39,9 +39,12 @@ const SignIn = () => {
 
     const forceToLogin = () => {
         setPhoto("something");
-        setNickname("별명입니다.");
-        localStorage.setItem("photo", "something");
-        localStorage.setItem("nickname", "별명입니다.");
+        setNickname("버블스");
+        localStorage.setItem(
+            "photo",
+            "https://static.wikia.nocookie.net/powerpuff/images/d/d2/Bubbles_HD.png"
+        );
+        localStorage.setItem("nickname", "버블스");
         setTimeout(() => {
             navigate("/");
         }, 500);
