@@ -1,9 +1,6 @@
 <div align=center>
-  <h1> MOODMOOD </h1>
-  <img src="https://drive.google.com/file/d/1r9rbPyo0JyUa5u8OLdwADg2cj512QFaM/view?usp=sharing" 
-       style="padding: 0;margin:0;">
-  <h6>"행복은 두 배로, 슬픔은 반으로"</h6>
-
+  <img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/4bc2119e-95a4-44b8-8114-c0494fa9a62f/moodmood.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20211204%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20211204T105241Z&X-Amz-Expires=86400&X-Amz-Signature=b647d3d5c9a06ec6743ff2d80dd635e492132064e2926dea0acf2e0edf9af556&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22moodmood.png%22&x-id=GetObject" width=70% height=70%>
+  <h4>"행복은 두 배로, 슬픔은 반으로"</h4>
 
 </div>
 
@@ -13,11 +10,16 @@
       욕설데이터셋
 
 02. AI Model
-    | aaa | bbb | ccc |
-    |---|---|---|
-    |  남정윤   |	인공지능, 팀장  |  
-    |  권순빈   |   인공지능    |
-
+    <table>
+      <tr>
+        <td><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FTXz8f%2FbtqEMwlA4Xl%2F7VAb9O3LA0r5IsCaQkKV7K%2Fimg.png" width="105" height="60"></td>
+        <td>pytorch</td>
+      </tr>
+      <tr>
+        <td><img src="https://media.vlpt.us/images/seolini43/post/7acce3fc-77cc-43a1-9098-05de1fe1399a/bert3.png" width="110" height="65"></td>
+        <td>KoBERT</td>
+      </tr>
+    </table>
 
 03. Skills
     > ![python](https://img.shields.io/badge/python-3.6|3.7-blue), ![ubuntu](https://img.shields.io/badge/ubuntu-16.04-orange), ![colab](https://img.shields.io/badge/google-colab-orange),![MySQL](https://img.shields.io/badge/MySQL-002b8a), ![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-63009e), ![JavaScript](https://img.shields.io/badge/-JavaScript-yellow)
@@ -27,13 +29,8 @@
     ![numpy](https://img.shields.io/badge/numpy-209d8d),
     ![scipy](https://img.shields.io/badge/scipy-interpolate-d63f38),
 
-**어떠한 인공지능 모델과 알고리즘을 사용했는지에 대한 설명과 엔드유저에게 보이는 웹서비스에 대한 소개**
-
-  - 사용하려는 인공지능 모델과 알고리즘을 명시
-  - 인공지능에 사용하려는 데이터를 명시, 이에 대한 설명
-  - 기술 스택 (python, d3, pandas, jupyter, javascript, MySQL 등)
-  - 사용된 라이브러리 (numpy, matplotlib, wordcloud 등)
-  - 웹서비스에 대한 자세한 개요
+05. 주요기능
+    > 
 
 ## 2. 프로젝트 목표
 
