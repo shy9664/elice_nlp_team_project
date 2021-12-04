@@ -8,6 +8,7 @@ import Grid from "@mui/material/Grid";
 import { Container } from "@mui/material";
 import Sidebar from "../components/Sidebar";
 import Calendar from "../components/Calendar";
+import MainChart from "../components/MainChart";
 
 const Main = () => {
     const [nickname, setNickname] = useRecoilState(nkatom);
@@ -42,7 +43,6 @@ const Main = () => {
                                 height: "100%",
                                 display: "flex",
                                 flexDirection: "column",
-                                // justifyContent: "center",
                             }}
                             elevation={3}
                         >
@@ -60,13 +60,20 @@ const Main = () => {
                         </Grid>
                         <Grid item xs={12} sm={7}>
                             <Paper
-                                sx={{ width: "100%", height: "100%" }}
+                                sx={{
+                                    width: "100%",
+                                    height: "100%",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    flexDirection: "column",
+                                }}
                                 elevation={3}
                             >
-                                솔직하게
+                                <MainChart />
                             </Paper>
                         </Grid>
-                        <Grid item xs={12}>
+                        <Grid item xs={12} sx={{ minHeight: 300 }}>
                             <Paper
                                 sx={{ width: "100%", height: "100%" }}
                                 elevation={3}
