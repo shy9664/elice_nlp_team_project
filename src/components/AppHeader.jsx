@@ -18,7 +18,8 @@ const AppHeader = () => {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    mr: 2,
+                    mr: 1,
+                    ml: 1,
                 }}
             >
                 <Box

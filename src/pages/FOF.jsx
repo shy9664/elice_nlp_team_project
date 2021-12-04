@@ -18,8 +18,6 @@ const FOF = () => {
                         left: "50%",
                         transform: "translate(-50%, -50%)",
                         width: 400,
-                        bgcolor: "background.paper",
-                        border: "2px solid #000",
                         boxShadow: 24,
                         p: 4,
                         display: "flex",
@@ -29,10 +27,10 @@ const FOF = () => {
                         maxWidth: 400,
                     }}
                 >
-                    <Typography sx={{ mb: 4 }} variant="h4">
-                        존재하지 않는 페이지
+                    <Typography sx={{ mb: 4 }} variant="h5">
+                        존재하지 않는 페이지에요 😞
                     </Typography>
-                    <Link to="/">
+                    <Link style={{ textDecoration: "none" }} to="/">
                         <Button variant="contained"> 돌아가기</Button>
                     </Link>
                 </Paper>

@@ -27,7 +27,11 @@ import {
     createCodePlugin,
     createPlugins,
     createPlateUI,
+    HeadingToolbar,
 } from "@udecode/plate";
+import BasicEditorToolbar from "./BasicEditorToolbar";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
 
 const editableProps = {
     placeholder: "Type…",
@@ -142,7 +146,23 @@ const BasicEditor = () => {
                 editableProps={editableProps}
                 initialValue={initialValue}
                 plugins={plugins}
-            />
+            >
+                <HeadingToolbar
+                    styles={{
+                        root: {
+                            position: "sticky",
+                            backgroundColor: "#fafafa",
+                            zIndex: 4,
+                            width: "100%",
+                            paddingLeft: "0",
+                            paddingRight: "0",
+                            marginLeft: "0",
+                        },
+                    }}
+                >
+                    <BasicEditorToolbar />
+                </HeadingToolbar>
+            </Plate>
         </>
     );
 };

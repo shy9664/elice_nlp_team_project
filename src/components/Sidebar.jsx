@@ -63,13 +63,19 @@ const Sidebar = () => {
                     alignItems: "center",
                     justifyContent: "center",
                     flexDirection: "column",
+                    mt: 2,
                 }}
             >
                 <Avatar
                     variant="rounded"
                     alt="avatar profile"
                     src={photo}
-                    sx={{ width: "10vw", height: "10vw", bgcolor: "#b2cefe" }}
+                    sx={{
+                        width: "60%",
+                        maxWidth: 200,
+                        height: "auto",
+                        bgcolor: "#b2cefe",
+                    }}
                 />
                 <Typography sx={{ mt: 3, textAlign: "center" }} variant="h4">
                     {nickname}

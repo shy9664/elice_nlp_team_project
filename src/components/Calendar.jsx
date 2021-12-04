@@ -19,7 +19,6 @@ export const Calendar = () => {
                     setValue(newValue);
                 }}
                 renderInput={(params) => <TextField {...params} />}
-                // sx={{ width: "100%" }}
             />
         </LocalizationProvider>
     );
