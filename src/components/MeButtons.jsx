@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from "react";
 import { useNavigate } from "react-router";
 import { useRecoilState } from "recoil";
@@ -10,31 +9,35 @@ const MyInfoButtons = () => {
     const [nickname, setNickname] = useRecoilState(nkatom);
     const [photo, setPhoto] = useRecoilState(ptatom);
     const navi = useNavigate();
-    const revise = () => {
-        console.log("수정하였습니다.");
-        localStorage.setItem("nickname", nickname);
-        localStorage.setItem("photo", photo);
+    const logout = () => {
+        console.log("로그아웃되었습니다.");
+        localStorage.clear();
+        setNickname("");
+        setPhoto("");
+        console.log(nickname);
+        console.log(photo);
+        navi("/signin");
     };
-    const toHome = () => {
-        console.log("홈으로");
-        navi("/");
+    const toMyInfo = () => {
+        console.log("내정보로");
+        navi("/me");
     };
     return (
         <>
             <Button
                 sx={{ mr: 1 }}
-                onClick={() => toHome()}
+                onClick={() => toMyInfo()}
                 variant="contained"
                 color="secondary"
             >
-                <Typography>홈으로</Typography>
+                <Typography>내 정보</Typography>
             </Button>
             <Button
-                onClick={() => revise()}
+                onClick={() => logout()}
                 variant="contained"
                 color="secondary"
             >
-                <Typography>수정하기</Typography>
+                <Typography>로그아웃</Typography>
             </Button>
         </>
     );

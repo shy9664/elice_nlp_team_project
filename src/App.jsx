@@ -4,9 +4,9 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { Routes, Route } from "react-router-dom";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
-import EditPost from "./pages/DairyWrite";
+import DiaryWrite from "./pages/DiaryWrite";
+import Me from "./pages/Me";
 
-import AppHeader from "./components/AppHeader";
 import Main from "./pages/Main";
 import FOF from "./pages/FOF";
 
@@ -18,7 +18,8 @@ const App = () => {
                 <Route path="/" element={<Main />} />
                 <Route path="signin" element={<SignIn />} />
                 <Route path="signup" element={<SignUp />} />
-                <Route path="diary/write" element={<EditPost />} />
+                <Route path="me" element={<Me />} />
+                <Route path="diary/write" element={<DiaryWrite />} />
                 <Route path="*" element={<FOF />} />
             </Routes>
         </>

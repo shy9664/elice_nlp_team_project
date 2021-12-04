@@ -2,13 +2,12 @@ import React from "react";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import BasicEditor from "../components/BasicEditor";
 import AppHeader from "../components/AppHeader";
 import Sidebar from "../components/Sidebar";
-import DiaryDateInput from "../components/DiaryDateInput";
-import DiaryWriteButtons from "../components/DiaryWriteButtons";
+import MyInfo from "../components/MyInfo";
+import MyInfoButtons from "../components/MyInfoButtons";
 
-const DiaryWrite = () => {
+const Me = () => {
     return (
         <>
             <AppHeader />
@@ -32,31 +31,23 @@ const DiaryWrite = () => {
                         </Paper>
                     </Grid>
                     <Grid container item spacing={2} xs={12} sm={9}>
-                        <Grid item>
-                            <DiaryDateInput />
-                        </Grid>
-                        <Grid item sx={{ height: "50vw" }}>
+                        <Grid item xs={12}>
                             <Paper
                                 sx={{
                                     width: "100%",
                                     height: "100%",
-                                    overflow: "scroll",
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    justifyContents: "space-between",
+                                    alignItems: "center",
+                                    p: 10,
                                 }}
-                                elevation={5}
                             >
-                                <BasicEditor />
+                                <MyInfo />
+                                <Grid item xs={12}>
+                                    <MyInfoButtons />
+                                </Grid>
                             </Paper>
-                        </Grid>
-                        <Grid
-                            item
-                            sx={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                                alignItems: "center",
-                                width: "100%",
-                            }}
-                        >
-                            <DiaryWriteButtons />
                         </Grid>
                     </Grid>
                 </Grid>
@@ -65,4 +56,4 @@ const DiaryWrite = () => {
     );
 };
 
-export default DiaryWrite;
+export default Me;

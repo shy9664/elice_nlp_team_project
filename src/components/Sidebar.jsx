@@ -9,7 +9,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { Typography } from "@mui/material";
-import MyInfoButtons from "./MyInfoButtons";
+import MyInfoButtons from "./MeButtons";
 
 const pagesInfo = [
     {
@@ -50,6 +50,8 @@ const Sidebar = () => {
             setNickname(ni);
             return;
         }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

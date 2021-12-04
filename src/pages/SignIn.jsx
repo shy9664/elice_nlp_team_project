@@ -32,6 +32,7 @@ const SignIn = () => {
 
         try {
             const userInfo = await signin(jsonData);
+            console.log(userInfo);
         } catch (e) {
             console.log(e);
         }
@@ -40,6 +41,8 @@ const SignIn = () => {
     const forceToLogin = () => {
         setPhoto("something");
         setNickname("버블스");
+        console.log(nickname);
+        console.log(photo);
         localStorage.setItem(
             "photo",
             "https://static.wikia.nocookie.net/powerpuff/images/d/d2/Bubbles_HD.png"

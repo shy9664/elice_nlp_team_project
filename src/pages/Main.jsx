@@ -9,6 +9,7 @@ import { Container } from "@mui/material";
 import Sidebar from "../components/Sidebar";
 import Calendar from "../components/Calendar";
 import MainChart from "../components/MainChart";
+import MainDiaries from "../components/MainDiaries";
 
 const Main = () => {
     const [nickname, setNickname] = useRecoilState(nkatom);
@@ -22,9 +23,12 @@ const Main = () => {
         if (p && ni) {
             setPhoto(p);
             setNickname(ni);
+            console.log(nickname);
+            console.log(photo);
             return;
         }
         navigate("/signin");
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
@@ -78,7 +82,7 @@ const Main = () => {
                                 sx={{ width: "100%", height: "100%" }}
                                 elevation={3}
                             >
-                                나머지
+                                <MainDiaries />
                             </Paper>
                         </Grid>
                     </Grid>
