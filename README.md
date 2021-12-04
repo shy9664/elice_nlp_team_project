@@ -19,7 +19,7 @@
 
 
 03. Skills
-    > ![python](https://img.shields.io/badge/python-3.6|3.7-blue), ![ubuntu](https://img.shields.io/badge/ubuntu-16.04-orange), ![jupyter](https://img.shields.io/badge/jupyter-orange), ![colab](https://img.shields.io/badge/google-colab-orange), ![d3](https://img.shields.io/badge/d3-yellow), ![MySQL](https://img.shields.io/badge/MySQL-002b8a), ![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-63009e), ![JavaScript](https://img.shields.io/badge/-JavaScript-yellow)
+    > ![python](https://img.shields.io/badge/python-3.6|3.7-blue), ![ubuntu](https://img.shields.io/badge/ubuntu-16.04-orange), ![colab](https://img.shields.io/badge/google-colab-orange),![MySQL](https://img.shields.io/badge/MySQL-002b8a), ![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-63009e), ![JavaScript](https://img.shields.io/badge/-JavaScript-yellow)
 
 04. Library
     > ![pandas](https://img.shields.io/badge/pandas-25b72d), 
