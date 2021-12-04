@@ -3,16 +3,16 @@ import React from "react";
 import { useRecoilState } from "recoil";
 import { dateAtom } from "../recoils/diary";
 
-import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-
-import BasicEditor from "../components/BasicEditor";
-import DiaryDateInput from "../components/DiaryDateInput";
-import DiaryWriteButtons from "../components/DiaryWriteButtons";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
 
 import BasicLayout from "../layouts/BasicLayout";
 
-const DiaryWrite = () => {
+import ReadonlyEditor from "../components/ReadonlyEditor";
+import DiaryAfterButtons from "../components/DiaryAfterButtons";
+
+const DiaryDetails = () => {
     const [date, setDate] = useRecoilState(dateAtom);
     const yearStr = date.getFullYear();
     const monthNum = date.getMonth() + 1;
@@ -22,9 +22,6 @@ const DiaryWrite = () => {
     const numDate = `${yearStr}-${monthStr}-${dateStr}`;
     return (
         <BasicLayout>
-            <Grid item>
-                <DiaryDateInput />
-            </Grid>
             <Grid item xs={12}>
                 <Paper
                     sx={{
@@ -32,25 +29,26 @@ const DiaryWrite = () => {
                         height: 530,
                         overflow: "scroll",
                         position: "relative",
+                        p: 4,
                     }}
                     elevation={5}
                 >
-                    <BasicEditor selectedDate={numDate} />
+                    <Typography variant="h4">{`${yearStr}년 ${monthNum}월 ${dateNum}일`}</Typography>
+                    <ReadonlyEditor selectedDate={numDate} />
                 </Paper>
             </Grid>
             <Grid
                 item
+                xs={12}
                 sx={{
                     display: "flex",
                     justifyContent: "space-between",
-                    width: "100%",
-                    alignItems: "flex-end",
                 }}
             >
-                <DiaryWriteButtons />
+                <DiaryAfterButtons />
             </Grid>
         </BasicLayout>
     );
 };
 
-export default DiaryWrite;
+export default DiaryDetails;

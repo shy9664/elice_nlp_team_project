@@ -1662,7 +1662,7 @@
     "@types/yargs" "^16.0.0"
     chalk "^4.0.0"
 
-"@mui/base@5.0.0-alpha.58", "@mui/base@^5.0.0-alpha.55":
+"@mui/base@5.0.0-alpha.58":
   version "5.0.0-alpha.58"
   resolved "https://registry.yarnpkg.com/@mui/base/-/base-5.0.0-alpha.58.tgz#01ab59a028f314e2f9a79f903a8336ac45853652"
   integrity sha512-YZorCbbzkokQZUnj+sdjUWIe+jaesuSVpKgwWS2mWdE50v1Ti/qMmevIrOT1lvFAilpj80Bkcg4KtlGWBJ6utQ==
@@ -1779,7 +1779,7 @@
   resolved "https://registry.yarnpkg.com/@mui/types/-/types-7.1.0.tgz#5ed928c5a41cfbf9a4be82ea3bbdc47bcc9610d5"
   integrity sha512-Hh7ALdq/GjfIwLvqH3XftuY3bcKhupktTm+S6qRIDGOtPtRuq2L21VWzOK4p7kblirK0XgGVH5BLwa6u8z/6QQ==
 
-"@mui/utils@^5.1.1", "@mui/utils@^5.2.2":
+"@mui/utils@^5.2.2":
   version "5.2.2"
   resolved "https://registry.yarnpkg.com/@mui/utils/-/utils-5.2.2.tgz#972aab7d2564e77c06e0c3c11e7b1aec6e37c927"
   integrity sha512-0u9ImUfpCfTxmvQTfUzTSS+jKWMX15MBZeZCRQZ0f7o9Yi8BlrLj33lMx0mFBkUSYdTXnqL4yfOn7RBzV01HMQ==
@@ -1789,27 +1789,6 @@
     "@types/react-is" "^16.7.1 || ^17.0.0"
     prop-types "^15.7.2"
     react-is "^17.0.2"
-
-"@mui/x-data-grid-generator@^5.1.0":
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/@mui/x-data-grid-generator/-/x-data-grid-generator-5.1.0.tgz#b778548a31b13378f496c0cdf0fc6fde4a7deab6"
-  integrity sha512-sENVpmMApjqI5GD660TmgcoYkYOUjS/vfn5gN0gvqKCV/aGjkaDpVdgRn8521nmFJ0xQ/9gBMLrE+T6WXjBjxg==
-  dependencies:
-    "@mui/base" "^5.0.0-alpha.55"
-    "@types/chance" "^1.1.3"
-    chance "^1.1.7"
-    clsx "^1.1.1"
-    lru-cache "^6.0.0"
-
-"@mui/x-data-grid@^5.1.0":
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/@mui/x-data-grid/-/x-data-grid-5.1.0.tgz#837e51be256fb5a3316bfe1c73ef6f537788785a"
-  integrity sha512-Pj6/FM+fmGjUYqQ26CC0fRiiLENWMfTyp8nOjEm95eqOPbyFM1BMLsZrCU78TR+jUMsE7nc2Y4lYkWlAPcvIgQ==
-  dependencies:
-    "@mui/utils" "^5.1.1"
-    clsx "^1.1.1"
-    prop-types "^15.7.2"
-    reselect "^4.1.4"
 
 "@nodelib/fs.scandir@2.1.4":
   version "2.1.4"
@@ -2144,11 +2123,6 @@
   integrity sha512-kSjgDMZONiIfSH1Nxcr5JIRMwUetDki63FSQfpTCz8ogF3Ulqm8+mr5f78dUYs6vMiB6gBusQqfQmBvHZj/lwg==
   dependencies:
     "@babel/types" "^7.3.0"
-
-"@types/chance@^1.1.3":
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/@types/chance/-/chance-1.1.3.tgz#d19fe9391288d60fdccd87632bfc9ab2b4523fea"
-  integrity sha512-X6c6ghhe4/sQh4XzcZWSFaTAUOda38GQHmq9BUanYkOE/EO7ZrkazwKmtsj3xzTjkLWmwULE++23g3d3CCWaWw==
 
 "@types/escape-html@^1.0.0":
   version "1.0.1"
@@ -4262,11 +4236,6 @@ chalk@^4.1.0:
   dependencies:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
-
-chance@^1.1.7:
-  version "1.1.8"
-  resolved "https://registry.yarnpkg.com/chance/-/chance-1.1.8.tgz#5d6c2b78c9170bf6eb9df7acdda04363085be909"
-  integrity sha512-v7fi5Hj2VbR6dJEGRWLmJBA83LJMS47pkAbmROFxHWd9qmE1esHRZW8Clf1Fhzr3rjxnNZVCjOEv/ivFxeIMtg==
 
 char-regex@^1.0.2:
   version "1.0.2"
@@ -11165,11 +11134,6 @@ requires-port@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/requires-port/-/requires-port-1.0.0.tgz"
   integrity sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=
-
-reselect@^4.1.4:
-  version "4.1.5"
-  resolved "https://registry.yarnpkg.com/reselect/-/reselect-4.1.5.tgz#852c361247198da6756d07d9296c2b51eddb79f6"
-  integrity sha512-uVdlz8J7OO+ASpBYoz1Zypgx0KasCY20H+N8JD13oUMtPvSHQuscrHop4KbXrbsBcdB9Ds7lVK7eRkBIfO43vQ==
 
 resize-observer-polyfill@^1.5.1:
   version "1.5.1"

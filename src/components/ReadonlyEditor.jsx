@@ -1,61 +1,29 @@
 import React from "react";
 import {
     Plate,
-    ELEMENT_PARAGRAPH,
-    ELEMENT_H1,
-    ELEMENT_H2,
-    ELEMENT_H3,
-    ELEMENT_H4,
-    ELEMENT_H5,
-    ELEMENT_H6,
-    ELEMENT_BLOCKQUOTE,
-    // ELEMENT_CODE_BLOCK,
-    // ELEMENT_CODE_LINE,
-    // MARK_BOLD,
-    // MARK_ITALIC,
-    // MARK_UNDERLINE,
-    // MARK_STRIKETHROUGH,
-    // MARK_CODE,
     createParagraphPlugin,
     createBlockquotePlugin,
     createCodeBlockPlugin,
     createHeadingPlugin,
-    // createBoldPlugin,
-    // createItalicPlugin,
-    // createUnderlinePlugin,
-    // createStrikethroughPlugin,
-    // createCodePlugin,
     createPlugins,
     createPlateUI,
-    HeadingToolbar,
 } from "@udecode/plate";
-import BasicEditorToolbar from "./BasicEditorToolbar";
 
 const editableProps = {
     placeholder: "Type…",
     style: {
-        padding: "15px",
+        padding: 15,
+        backgroundColor: "white",
+        marginTop: 15,
     },
 };
 
-const BasicEditor = ({ selectedDate }) => {
-    // // Not important, quick helper to create a block element with (marked) text
-    // const createElement = (text, { type = ELEMENT_PARAGRAPH, mark } = {}) => {
-    //     const leaf = { text };
-    //     if (mark) {
-    //         leaf[mark] = true;
-    //     }
-
-    //     return {
-    //         type,
-    //         children: [leaf],
-    //     };
+const ReadonlyEditor = ({ selectedDate, isDataContent }) => {
+    // const initVal = () => {
+    //     console.log(selectedDate);
+    //     const str = );
+    //     return JSON.parse(str);
     // };
-
-    const initVal = () => {
-        const str = localStorage.getItem(selectedDate);
-        return JSON.parse(str);
-    };
 
     // const initialValue = [
     //     createElement("🧱 기본 Plate 에디터에요!", { type: ELEMENT_H1 }),
@@ -146,27 +114,15 @@ const BasicEditor = ({ selectedDate }) => {
             <Plate
                 id="1"
                 editableProps={editableProps}
-                initialValue={initVal()}
+                value={
+                    isDataContent
+                        ? JSON.parse(selectedDate)
+                        : JSON.parse(localStorage.getItem(selectedDate))
+                }
                 plugins={plugins}
-            >
-                <HeadingToolbar
-                    styles={{
-                        root: {
-                            position: "sticky",
-                            backgroundColor: "#fafafa",
-                            zIndex: 4,
-                            width: "100%",
-                            paddingLeft: "0",
-                            paddingRight: "0",
-                            marginLeft: "0",
-                        },
-                    }}
-                >
-                    <BasicEditorToolbar />
-                </HeadingToolbar>
-            </Plate>
+            ></Plate>
         </>
     );
 };
 
-export default BasicEditor;
+export default ReadonlyEditor;

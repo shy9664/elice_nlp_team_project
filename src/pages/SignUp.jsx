@@ -126,7 +126,7 @@ export default function SignUp() {
                         <Grid item>
                             <Link to="/signin">
                                 <Typography variant="body2">
-                                    Already have an account? Sign in
+                                    이미 회원이신가요?
                                 </Typography>
                             </Link>
                         </Grid>

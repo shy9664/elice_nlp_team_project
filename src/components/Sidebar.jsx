@@ -78,7 +78,7 @@ const Sidebar = () => {
                     }}
                 />
                 <Typography sx={{ mt: 3, textAlign: "center" }} variant="h4">
-                    {nickname}
+                    {nickname || "..."}
                 </Typography>
             </Box>
             <Box

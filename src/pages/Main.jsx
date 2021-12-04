@@ -34,12 +34,12 @@ const Main = () => {
 
     return (
         <BasicLayout>
-            <Grid item xs={12} lg={5}>
+            <Grid item xs={12} md={6} lg={5}>
                 <Paper sx={{ width: "100%", height: "100%" }} elevation={3}>
                     <Calendar />
                 </Paper>
             </Grid>
-            <Grid item xs={12} lg={7}>
+            <Grid item xs={12} md={6} lg={7}>
                 <Paper
                     sx={{
                         width: "100%",
@@ -55,7 +55,17 @@ const Main = () => {
                 </Paper>
             </Grid>
             <Grid item xs={12}>
-                <Paper sx={{ width: "100%", height: "100%" }} elevation={3}>
+                <Paper
+                    sx={{
+                        width: "100%",
+                        height: "100%",
+                        overflow: "scroll",
+                        p: 3,
+                        maxHeight: 200,
+                        backgroundColor: "#eeeeee",
+                    }}
+                    elevation={3}
+                >
                     <MainDiaries />
                 </Paper>
             </Grid>

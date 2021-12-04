@@ -9,6 +9,7 @@ import Me from "./pages/Me";
 
 import Main from "./pages/Main";
 import FOF from "./pages/FOF";
+import DiaryDetails from "./pages/DiaryDetails";
 
 const App = () => {
     return (
@@ -20,6 +21,7 @@ const App = () => {
                 <Route path="signup" element={<SignUp />} />
                 <Route path="me" element={<Me />} />
                 <Route path="diary/write" element={<DiaryWrite />} />
+                <Route path="diary/done" element={<DiaryDetails />} />
                 <Route path="*" element={<FOF />} />
             </Routes>
         </>
