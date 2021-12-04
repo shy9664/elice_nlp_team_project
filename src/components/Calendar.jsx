@@ -5,13 +5,13 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import StaticDatePicker from "@mui/lab/StaticDatePicker";
 
-export default function StaticDatePickerLandscape() {
+export const StaticDatePickerLandscape = () => {
     const [value, setValue] = React.useState(new Date());
 
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
             <StaticDatePicker
-                orientation="landscape"
+                orientation="portrait"
                 openTo="day"
                 value={value}
                 shouldDisableDate={isWeekend}
@@ -22,4 +22,6 @@ export default function StaticDatePickerLandscape() {
             />
         </LocalizationProvider>
     );
-}
+};
+
+export default StaticDatePickerLandscape;

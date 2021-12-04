@@ -7,6 +7,7 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { Container } from "@mui/material";
 import Sidebar from "../components/Sidebar";
+import Calendar from "../components/Calendar";
 
 const Main = () => {
     const [nickname, setNickname] = useRecoilState(nkatom);
@@ -54,7 +55,7 @@ const Main = () => {
                                 sx={{ width: "100%", height: "100%" }}
                                 elevation={3}
                             >
-                                솔직하게
+                                <Calendar />
                             </Paper>
                         </Grid>
                         <Grid item xs={12} sm={7}>
