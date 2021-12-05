@@ -21,17 +21,20 @@ const SignIn = () => {
     const [photo, setPhoto] = useRecoilState(ptatom);
 
     const navigate = useNavigate();
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        event.stopPropagation();
         const jsonData = {
             email: data.get("email"),
             password: data.get("password"),
         };
 
+        console.log(jsonData);
+
         try {
             const userInfo = await signin(jsonData);
+
             console.log(userInfo);
             setPhoto(userInfo.photo);
             setNickname(userInfo.nickname);

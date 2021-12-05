@@ -8,12 +8,14 @@ import getUrl from "./getUrl";
  * @returns
  */
 const signin = async (signinData) => {
-    const url = getUrl("/login");
+    const url = getUrl("/login"); // url 생성 => http://elice~~~~/login
     try {
-        const response = await axios.post(url, signinData, {
-            withCredentials: true,
-        });
+        // => 일단 시도해보고, 에러가 나면 실행을 멈추고 => catch scope 안으로 들어가요.
+        const response = await axios.post(url, signinData);
+        console.log("hello");
         return response.data;
+
+        // axios.post(~~).then(() => {}).catch((e) => {})
     } catch (e) {
         console.log(e);
     }

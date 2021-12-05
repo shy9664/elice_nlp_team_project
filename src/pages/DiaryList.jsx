@@ -68,7 +68,7 @@ const DiaryList = () => {
         // 여기서 받아와서 diaries 에 set해주세요.
     }, []);
 
-    useEffect(() => {
+    useEffect(() => {''
         if (isPublic) {
             if (fromOld) {
                 setDiaries(mockups.filter((diary) => diary.is_shared));

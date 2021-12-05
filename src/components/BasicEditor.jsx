@@ -8,28 +8,25 @@ import {
     ELEMENT_H4,
     ELEMENT_H5,
     ELEMENT_H6,
-    ELEMENT_BLOCKQUOTE,
-    // ELEMENT_CODE_BLOCK,
-    // ELEMENT_CODE_LINE,
-    // MARK_BOLD,
-    // MARK_ITALIC,
-    // MARK_UNDERLINE,
-    // MARK_STRIKETHROUGH,
     // MARK_CODE,
     createParagraphPlugin,
     createBlockquotePlugin,
     createCodeBlockPlugin,
     createHeadingPlugin,
-    // createBoldPlugin,
-    // createItalicPlugin,
-    // createUnderlinePlugin,
-    // createStrikethroughPlugin,
+    createAlignPlugin,
+    createBasicMarksPlugin,
+    createFontColorPlugin,
+    createFontBackgroundColorPlugin,
+    createFontSizePlugin,
     // createCodePlugin,
     createPlugins,
     createPlateUI,
     HeadingToolbar,
 } from "@udecode/plate";
 import BasicEditorToolbar from "./BasicEditorToolbar";
+import AlignToolbarButtons from "./AlignToolbarButtons";
+import BasicMarkToolbarButtons from "./BasicMarkToolbarButtons";
+import FontToolbarButtons from "./FontToolbarButtons";
 
 const editableProps = {
     placeholder: "Type…",
@@ -130,11 +127,25 @@ const BasicEditor = ({ selectedDate }) => {
             createHeadingPlugin(), // heading elements
 
             // marks
-            // createBoldPlugin(), // bold mark
-            // createItalicPlugin(), // italic mark
-            // createUnderlinePlugin(), // underline mark
-            // createStrikethroughPlugin(), // strikethrough mark
             // createCodePlugin(), // code mark
+            createAlignPlugin({
+                inject: {
+                    props: {
+                        validTypes: [
+                            ELEMENT_PARAGRAPH,
+                            ELEMENT_H1,
+                            ELEMENT_H2,
+                            ELEMENT_H3,
+                            ELEMENT_H4,
+                            ELEMENT_H5,
+                            ELEMENT_H6,
+                        ],
+                    },
+                },
+            }),
+            createBasicMarksPlugin(), // 진하게 등등
+            createFontColorPlugin(),
+            createFontBackgroundColorPlugin(),
         ],
         {
             components: createPlateUI(),
@@ -163,6 +174,9 @@ const BasicEditor = ({ selectedDate }) => {
                     }}
                 >
                     <BasicEditorToolbar />
+                    <FontToolbarButtons />
+                    <AlignToolbarButtons />
+                    <BasicMarkToolbarButtons />
                 </HeadingToolbar>
             </Plate>
         </>
