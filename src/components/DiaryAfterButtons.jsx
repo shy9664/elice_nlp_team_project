@@ -26,6 +26,7 @@ const DiaryAfterButtons = () => {
     const monthStr = monthNum < 10 ? `0${monthNum}` : monthNum;
     const dateStr = dateNum < 10 ? `0${dateNum}` : dateNum;
     const numDate = `${yearStr}-${monthStr}-${dateStr}`;
+    const otherNumDate = `${yearStr}${monthStr}${dateStr}`;
 
     const cancel = () => {
         console.log("글쓰기 취소");
@@ -44,9 +45,9 @@ const DiaryAfterButtons = () => {
     };
 
     const deleteDiary = async () => {
-        console.log(`삭제: ${numDate}`);
+        console.log(`삭제: ${otherNumDate}`);
         try {
-            deleteArticle(numDate);
+            deleteArticle(otherNumDate);
         } catch (e) {
             console.log(e);
         }

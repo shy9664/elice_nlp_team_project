@@ -10,6 +10,7 @@ import getUrl from "./getUrl";
 export const createArticle = async (writeData) => {
     const url = getUrl(`/article`);
     try {
+        console.log(writeData);
         const response = await axios.post(url, writeData);
         return response.data;
     } catch (e) {

@@ -27,17 +27,21 @@ const DiaryWriteButtons = () => {
         const monthStr = monthNum < 10 ? `0${monthNum}` : monthNum;
         const dateStr = dateNum < 10 ? `0${dateNum}` : dateNum;
         const numDate = `${yearStr}-${monthStr}-${dateStr}`;
+        const otherNumDate = `${yearStr}${monthStr}${dateStr}`;
 
         // localStorage.setItem("diaryContent", contentString);
         localStorage.setItem(numDate, contentString);
 
         try {
             if (isUpdating) {
-                const response = await updateArticle(numDate, contentString);
+                const response = await updateArticle(
+                    otherNumDate,
+                    contentString
+                );
             } else {
                 const response = await createArticle({
                     text: contentString,
-                    date: Number(numDate),
+                    date: Number(otherNumDate),
                 });
             }
         } catch (e) {
