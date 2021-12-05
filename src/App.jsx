@@ -11,6 +11,7 @@ import Main from "./pages/Main";
 import FOF from "./pages/FOF";
 import DiaryDetails from "./pages/DiaryDetails";
 import DiaryList from "./pages/DiaryList";
+import SympDiaryList from "./pages/SympDiaryList";
 
 const App = () => {
     return (
@@ -24,6 +25,7 @@ const App = () => {
                 <Route path="diary" element={<DiaryList />} />
                 <Route path="diary/write" element={<DiaryWrite />} />
                 <Route path="diary/done" element={<DiaryDetails />} />
+                <Route path="diary/symp" element={<SympDiaryList />} />
                 <Route path="*" element={<FOF />} />
             </Routes>
         </>
