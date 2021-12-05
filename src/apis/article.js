@@ -27,7 +27,7 @@ export const createArticle = async (writeData) => {
 export const updateArticle = async (date, writeData) => {
     const url = getUrl(`/article/${date}`);
     try {
-        const response = await axios.patch(url, writeData);
+        const response = await axios.patch(url, { text: writeData });
         return response.data;
     } catch (e) {
         console.log(e);
@@ -52,9 +52,9 @@ export const deleteArticle = async (date) => {
 
 /**
  * 글 읽기
- * 
- * @param {string} date 
- * @returns 
+ *
+ * @param {string} date
+ * @returns
  */
 export const readArticle = async (date) => {
     const url = getUrl(`/article/${date}`);

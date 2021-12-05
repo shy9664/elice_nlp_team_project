@@ -13,7 +13,9 @@ import DiaryWriteButtons from "../components/DiaryWriteButtons";
 import BasicLayout from "../layouts/BasicLayout";
 
 const DiaryWrite = () => {
+    // eslint-disable-next-line no-unused-vars
     const [date, setDate] = useRecoilState(dateAtom);
+
     const yearStr = date.getFullYear();
     const monthNum = date.getMonth() + 1;
     const dateNum = date.getDate();

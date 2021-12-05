@@ -4,13 +4,14 @@ import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { usePlateValue } from "@udecode/plate-core";
 import Button from "@mui/material/Button";
-import { dateAtom } from "../recoils/diary";
-import { createArticle } from "../apis/article";
+import { dateAtom, isUpdateNow } from "../recoils/diary";
+import { createArticle, updateArticle } from "../apis/article";
 
 const DiaryWriteButtons = () => {
     const editorValue = usePlateValue();
     const navi = useNavigate();
     const [date, setDate] = useRecoilState(dateAtom);
+    const [isUpdating, setIsUpdating] = useRecoilState(isUpdateNow);
 
     const cancel = () => {
         console.log("글쓰기 취소");
@@ -31,17 +32,26 @@ const DiaryWriteButtons = () => {
         localStorage.setItem(numDate, contentString);
 
         try {
-            const response = await createArticle({
-                text: contentString,
-                date: Number(numDate),
-            });
+            if (isUpdating) {
+                const response = await updateArticle(numDate, contentString);
+            } else {
+                const response = await createArticle({
+                    text: contentString,
+                    date: Number(numDate),
+                });
+            }
         } catch (e) {
             console.log(e);
         }
     };
 
-    const forceToNext = () => {
-        navi("/diary/done");
+    const forceToNext = async () => {
+        try {
+            await submit();
+        } catch (e) {
+        } finally {
+            navi("/diary/done");
+        }
     };
 
     return (
