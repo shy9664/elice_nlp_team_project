@@ -21,6 +21,7 @@ api를 이해 못하시겠다고 해서 signin에 대략적으로 어떻게 쓴�
 공감 많은순 <-이 처리는 어떻게? 
 12월 6일 - backend 폴더가 없어도 됩니다 근데 이때는 .env랑 .gitignore를 root 폴더와 함께..
 ex) frontend 껍데기 없애기
+proxy 오류가 나는 것 같아서 제가 잘 못써서 지웠습니다
 -->
 
 - package manager 통일: `yarn`
