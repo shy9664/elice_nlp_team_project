@@ -8,9 +8,18 @@
 
   <h4>"행복은 두 배로, 슬픔은 반으로"</h4>
 
-</div>
 
 <br><br>
+
+![downloads](https://img.shields.io/npm/dt/MOODMOOD)
+[![hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fohbyul&count_bg=%237A7A7A&title_bg=%23FFADCC&icon_color=%23FF0000&title=hits&edge_flat=false)](https://kdt-gitlab.elice.io/002-part3-nlp/team2/nlp-project-team2)
+![followers](https://img.shields.io/github/followers/ohbyul?style=social)
+<!-- <br>
+![codesize](https://img.shields.io/github/languages/code-size/beygee/survive)
+![reposize](https://img.shields.io/github/repo-size/beygee/survive) -->
+
+</div>
+
 
 ## 1. 프로젝트 소개
 00. 기능 소개
@@ -47,12 +56,10 @@
         <td align=center>mySQL</td>
         <td align=center>SQL<br>Alchemy</td>
         <td align=center>Ngnix</td>
-
-
-
       </tr>
     </table>
-    
+
+    > ![ubuntu](https://img.shields.io/badge/ubuntu-16.04-orange), ![MySQL](https://img.shields.io/badge/-MySQL-%2300618a), ![SQLAlchemy](https://img.shields.io/badge/-SQLAlchemy-%23cb1700), ![](https://img.shields.io/badge/-Jinja2-630207)
     <br>
 
 03. Library
@@ -61,6 +68,7 @@
         <td><img src="https://pytorch.org/assets/images/pytorch-logo.png" width="80" height="80"></td>
         <td><img src="https://media.vlpt.us/images/chez_bono/post/487c1fc1-4d58-4a97-aaaf-e0d1d91c0cb6/React.js_logo-512.png" width="70" height="70"></td>
         <td><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Axios_logo_%282017%29.svg/1280px-Axios_logo_%282017%29.svg.png" width="70" height="20"></td>
+        <td><img src="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbIIBwO%2Fbtrc2Lw7HBs%2FP4hJVVvKkEGfDu9XRzkiq1%2Fimg.png" width="70" height="70"></td>
         
         
       </tr>
@@ -68,36 +76,35 @@
         <td align=center>Pytorch</td>
         <td align=center>React</td>
         <td align=center>Axios</td>
+        <td align=center>Recoil</td>
 
 
       </tr>
     </table>
 
-    > ![python](https://img.shields.io/badge/python-3.7|3.8-blue), ![ubuntu](https://img.shields.io/badge/ubuntu-16.04-orange), ![colab](https://img.shields.io/badge/google-colab-orange),![MySQL](https://img.shields.io/badge/MySQL-002b8a), ![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-63009e), ![JavaScript](https://img.shields.io/badge/-JavaScript-yellow)
-    
+    > ![](https://img.shields.io/badge/-tqdm-green), ![pandas](https://img.shields.io/badge/pandas-25b72d), 
+    ![numpy](https://img.shields.io/badge/numpy-209d8d), ![mxnet](https://img.shields.io/badge/-mxnet-%230393d6), ![gluonNLP](https://img.shields.io/badge/-GluonNLP-%23d7ebfe), ![](https://img.shields.io/badge/-sentencepiece-%239fa1a4),  ![](https://img.shields.io/badge/-Counter-black), ![](https://img.shields.io/badge/-Slate-%23741e4b), ![](https://img.shields.io/badge/-PyMySQL-blueviolet)
+
     <br>
 
 04. Skills
     <table>
       <tr>
         <td><img src="https://img2.quasarzone.com/editor/2021/07/02/f6381015430ce5a4e608b3865a1a96a0.png" width="55" height="55"></td>
-        <td><img src="" width="70" height="70"></td>
+        <td><img src="https://blog.kakaocdn.net/dn/ICVj3/btqw8CnwRqm/UD96COJ6GKk4Y9aF4w46gK/img.png" width="80" height="77"></td>
         
       </tr>
       <tr>
         <td align=center>KoBERT</td>
-        <td align=center>KoBERT</td>
-        <td align=center>React</td>
+        <td align=center>NVIDIA<br>CUDA</td>
 
       </tr>
     </table>
 
 
 
-    > ![pandas](https://img.shields.io/badge/pandas-25b72d), 
-    ![numpy](https://img.shields.io/badge/numpy-209d8d),
-    ![scipy](https://img.shields.io/badge/scipy-interpolate-d63f38),
-    
+    > ![colab](https://img.shields.io/badge/google-colab-orange), ![](https://img.shields.io/badge/-transformers-brightgreen)
+
     <br>
 
 ## 2. 프로젝트 목표
