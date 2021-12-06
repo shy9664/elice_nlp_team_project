@@ -7,6 +7,17 @@ import {
     createHeadingPlugin,
     createPlugins,
     createPlateUI,
+    createAlignPlugin,
+    createBasicMarksPlugin,
+    createFontColorPlugin,
+    createFontBackgroundColorPlugin,
+    ELEMENT_PARAGRAPH,
+    ELEMENT_H1,
+    ELEMENT_H2,
+    ELEMENT_H3,
+    ELEMENT_H4,
+    ELEMENT_H5,
+    ELEMENT_H6,
 } from "@udecode/plate";
 
 const editableProps = {
@@ -103,6 +114,24 @@ const ReadonlyEditor = ({ selectedDate, isDataContent }) => {
             // createUnderlinePlugin(), // underline mark
             // createStrikethroughPlugin(), // strikethrough mark
             // createCodePlugin(), // code mark
+            createAlignPlugin({
+                inject: {
+                    props: {
+                        validTypes: [
+                            ELEMENT_PARAGRAPH,
+                            ELEMENT_H1,
+                            ELEMENT_H2,
+                            ELEMENT_H3,
+                            ELEMENT_H4,
+                            ELEMENT_H5,
+                            ELEMENT_H6,
+                        ],
+                    },
+                },
+            }),
+            createBasicMarksPlugin(), // 진하게 등등
+            createFontColorPlugin(),
+            createFontBackgroundColorPlugin(),
         ],
         {
             components: createPlateUI(),
