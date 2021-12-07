@@ -1,57 +1,26 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import styled from "styled-components";
-import SidebarItem from "./SidebarItem";
-import profile from "../assets/profile.png";
 
-const Side = styled.div`
-  display: flex;
-  border-right: 1px solid #e0e0e0;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 20%;
-`
-const Profile = styled.img`
-  width: 150px;
-  height: 150px;
-  border-radius: 100%;
-`
-const Menu = styled.div`
-  margin-top: 30px;
-  width: 200px;
-  display: flex;
-  flex-direction: column;
-`
+const SideBox1 = styled.div`
+  background-color: black;
+  
+`;
 
 function Sidebar() {
-  const menus = [
-    { name: "로그인", path: "/" },
-    { name: "로그아웃", path: "/login" },
-    { name: "글쓰기로바뀔예정", path: "/register" },
-    { name: "목록으로바뀔예정", path: "/setting"}
-  ];
+  
   return (
-    <Side>
-      <Profile src={profile}></Profile>
-      <Menu>
-        {menus.map((menu, index) => {
-          return (
-            <NavLink
-              exact
-              style={{color: "gray", textDecoration: "none"}}
-              to={menu.path}
-              key={index}
-              activeStyle={{color: "black"}}
-            >
-              <SidebarItem
-                menu={menu}
-              />
-            </NavLink>
-          );
-        })}
-      </Menu>
-    </Side>
+    <SideBox1>
+      <div>
+      <Link to="/detail"><ul> 내 정보</ul></Link>
+      <Link to="/"><ul> 로그아웃</ul></Link>
+      <Link to="/write"><ul> 일기쓰기</ul></Link>
+      <Link to="/list"><ul> 목록</ul></Link>
+      <Link to="/"><ul> 공감한 게시글</ul></Link>
+      <Link to="/"><ul> 열린게시판</ul></Link>
+      </div>
+    </SideBox1>
+    
   );
 }
 

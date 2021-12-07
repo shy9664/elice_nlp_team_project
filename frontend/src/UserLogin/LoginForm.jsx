@@ -5,6 +5,10 @@ import { useHistory } from "react-router";
 export default function LoginForm({ onSubmit }) {
   const emailRef = useRef();
   const passwordRef = useRef();
+// //
+//   const password2Ref = useRef();
+//  const nickmaneRef = useRef();
+
 
   const history = useHistory();
 
@@ -28,7 +32,7 @@ export default function LoginForm({ onSubmit }) {
   return (
     <div>
       <form>
-        <fieldset>
+        <fieldset className="box1">
           <label htmlFor="email">이메일</label>
           <input
             placeholder="메일을 입력해주세요."
