@@ -1,29 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import { BrowserRouter } from 'react-router-dom';
-import axios from 'axios';
-//import * as serviceWorker from './serviceWorker';
-//import RootReducer from 'rootreducer'; 
+import React from "react";
+import ReactDOM from "react-dom";
+import { RecoilRoot } from "recoil";
+import { ThemeProvider } from "@mui/material/styles";
+import App from "./App";
+import theme from "./theme";
+// import axios from "axios";
+import { BrowserRouter } from "react-router-dom";
+import dotenv from "dotenv";
+import "./index.css";
 
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
+dotenv.config();
 
- ReactDOM.render( 
-    <App />, 
-    document.getElementById('root')     
-);
-
-//serviceWorker.register();
-/*
 ReactDOM.render(
-    <React.StrictMode>
-    <BrowserRouter>
-    <App />
-    </BrowserRouter>
-    </React.StrictMode>,
-    document.querySelector('#root'),
-)
-*/
+    <BrowserRouter basename="/">
+        <RecoilRoot>
+            <ThemeProvider theme={theme}>
+                <App />
+            </ThemeProvider>
+        </RecoilRoot>
+    </BrowserRouter>,
+    document.querySelector("#root")
+);
