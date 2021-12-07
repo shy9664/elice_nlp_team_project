@@ -31,10 +31,12 @@ def user_signup():
     if User.query.filter(User.email == email).first():
         return jsonify(result="Registered email")
     if User.query.filter(User.nickname == nickname).first():
-        return jsonify(result='Registered nickname')
+        return jsonify(result="Registered nickname")
 
     password = generate_password_hash(password)
-    user = User(email=email, password=password, nickname=nickname)
+    photo = "../static/uploads/basic_photo.png"
+
+    user = User(email=email, password=password, nickname=nickname, photo=photo)
     db.session.add(user)
     db.session.commit()
 
