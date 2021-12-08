@@ -5,7 +5,7 @@ from models.user import User
 
 from app import db
 
-board = Blueprint('board', __name__, url_prefix='/board')
+board = Blueprint('board', __name__, url_prefix='/api/board')
 
 @board.before_app_request
 def load_logged_in_user_info():

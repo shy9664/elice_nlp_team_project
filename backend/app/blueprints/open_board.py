@@ -4,7 +4,7 @@ from models.article import Article
 from models.sympathy import Sympathy
 
 
-open_board = Blueprint("open_board", __name__, url_prefix="/board")
+open_board = Blueprint("open_board", __name__, url_prefix="/api/board")
 
 
 @open_board.route("")

@@ -8,7 +8,7 @@ import getUrl from "./getUrl";
  * @returns
  */
 const signin = async (signinData) => {
-    const url = getUrl("/login"); // url 생성 => http://elice~~~~/login
+    const url = getUrl("/api/login"); // url 생성 => http://elice~~~~/login
     try {
         // => 일단 시도해보고, 에러가 나면 실행을 멈추고 => catch scope 안으로 들어가요.
         const response = await axios.post(url, signinData, {

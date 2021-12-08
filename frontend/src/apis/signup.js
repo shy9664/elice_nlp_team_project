@@ -6,7 +6,7 @@ import getUrl from "./getUrl";
  * @param {{email: string, password: string, passwordCheck: string, nickname: string}} signupData
  */
 const signup = async (signupData) => {
-    const url = getUrl("/signup");
+    const url = getUrl("/api/signup");
     try {
         const response = await axios.post(url, signupData, {
             withCredentials: true,

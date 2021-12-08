@@ -4,7 +4,7 @@ from models.user import User
 
 from app import db
 
-my_article = Blueprint('my_article', __name__, url_prefix='/article')
+my_article = Blueprint('my_article', __name__, url_prefix='/api/article')
 
 @my_article.before_app_request
 def load_logged_in_user_info():

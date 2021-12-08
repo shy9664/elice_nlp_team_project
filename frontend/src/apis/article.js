@@ -8,7 +8,7 @@ import getUrl from "./getUrl";
  * @returns
  */
 export const createArticle = async (writeData) => {
-    const url = getUrl(`/article`);
+    const url = getUrl(`/api/article`);
     try {
         console.log(writeData);
         const response = await axios.post(url, writeData);

@@ -4,7 +4,7 @@ from werkzeug.security import generate_password_hash
 from models.user import User
 from app import db
 
-signup = Blueprint("signup", __name__)
+signup = Blueprint("signup", __name__, url_prefix='/api')
 
 email_validation = re.compile("^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")
 password_validation = re.compile(
