@@ -50,8 +50,9 @@ const SignIn = () => {
                     "서버에서 잘못된 응답이 전송되었습니다! 로그인 멈춰!"
                 );
             }
-
-            navigate("/");
+            setTimeout(() => {
+                navigate("/");
+            }, 500);
         } catch (e) {
             console.log(e);
         }
