@@ -4,7 +4,7 @@ from models.user import User
 
 from app import db
 
-my_article = Blueprint('my_article', __name__, url_prefix='/article')
+my_article = Blueprint('my_article', __name__, url_prefix='/api/article')
 
 @my_article.before_app_request
 def load_logged_in_user_info():
@@ -31,6 +31,7 @@ def create_article():
 @my_article.route('/<date>', methods=['GET'])
 def get_article(date):
     diary = Article.query.filter((Article.date == date) & (Article.author_id == g.user.id)).first()
+    db.session.close()
     return jsonify(date=diary.date.strftime('%Y-%m-%d'), text=diary.text, emotion=diary.emotion, is_shared=diary.is_shared, is_sharable=diary.is_sharable)
 
 @my_article.route('/<date>', methods=['PATCH'])

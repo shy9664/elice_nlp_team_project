@@ -8,7 +8,7 @@ import re
 
 from app import db
 
-user = Blueprint('user', __name__)
+user = Blueprint('user', __name__, url_prefix='/api')
 
 password_validation = re.compile("^.*(?=^.{8,20}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%*^&+=]).*$")
 nickname_validation = re.compile("^[a-zA-Z가-힣0-9]+$")

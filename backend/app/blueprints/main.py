@@ -4,7 +4,7 @@ from models.user import User
 
 from datetime import datetime
 
-main = Blueprint('main', __name__)
+main = Blueprint('main', __name__, url_prefix='/api')
 
 @main.before_app_request
 def load_logged_in_user_info():

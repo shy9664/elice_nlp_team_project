@@ -1,70 +1,55 @@
-# Getting Started with Create React App
+<!--  다 갈아엎고 구성 한 일
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+에디터 사용 시 공식 문서를 제발 좀 잘 읽어보자??
+bootstrap  < css < antd 리액트 친화적인 환경 사용하기 권장 -> bootstrap 포기;;
+추후에 백엔드 설치된것들은 지워야되나요??
+localStorage 구글 임시저장소 어쩌고 하던데 일단 임시저장.. 제가 잘 몰라서 일단은..
+jsx는 하나의 기능만 & 기능 확장, js는 여러 기능을 반환한다고 해서.. 일단은 그에 따라서 재구성..
 
-## Available Scripts
+요청은 성공이라고 하는데 KEY_ERROR가 발생함
+type 에러같다는..느낌적인 느낌이?
+그래서 강제 인증 부분을 만들어서 일단 메인으로 이동하게 만들었습니다.
+env 파일에 백엔드 서버를 변경하면 될꺼같은데.. 환경변수는 auto reload가 안되니 재시작 ?? 
+css 임의로 처리했습니다 라이브러리 설치 후 간단하게 수정하시면 됩니다.. 혹은 지우고 사용하셔도됩니다
 
-In the project directory, you can run:
+api를 이해 못하시겠다고 해서 signin에 대략적으로 어떻게 쓴건지 넣어놨습니다.
+제가 api를 받을 수 없어서 코치님께서 말씀해주신 목업 코드를 넣었습니다..
+뭐냐 뭐 수정하니까 실행 후에 터미널창 겁나 부들대는데 ;;;
 
-### `yarn start`
+12월 5일 - 상세페이지, 차트 부분은 아직.. 제가 차트를 할수 있을까요..?
+깃 무서워서 일단 보류... F: 상세페이지, 글쓰기 툴바 수정
+공감 많은순 <-이 처리는 어떻게? 
+12월 6일 - backend 폴더가 없어도 됩니다 근데 이때는 .env랑 .gitignore를 root 폴더와 함께..
+ex) frontend 껍데기 없애기
+proxy 오류가 나는 것 같아서 제가 잘 못써서 지웠습니다
+git에 pull 하고 다시 올리려니까 변한 파일이 너무 많아서 오류가 뜸..
+브랜치, history 지우고 다시 재업로드 했습니다.
+구현 안된건 열린게시판 공감 많은순
+-->
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- package manager 통일: `yarn`
+- 쓸모없는 패키지 정리하기
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```bash
+yarn remove @ckeditor/ckeditor5-build-classic @ckeditor/ckeditor5-react antd body-parser bootstrap cors cross-env express mysql2 node-sass nodemon npm quill react-bootstrap react-paginate react-quill react-redux sequelize styled-components typescript vue-codemirror web-vitals @toast-ui/editor-plugin-chart @toast-ui/editor-plugin-code-syntax-highlight @toast-ui/editor-plugin-color-syntax @toast-ui/editor-plugin-table-merged-cell @toast-ui/editor-plugin-uml @toast-ui/react-editor serviceworker
+```
 
-### `yarn test`
+- `react-router-dom` 최신 버전으로 업데이트
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+yarn add react-router-dom@6 history@5
+```
 
-### `yarn build`
+- ui library 추가하기
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+yarn add @emotion/react @mui/material @emotion/styled @mui/icons-material
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- 전체 상태 관리 라이브러리 추가하기
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+yarn add recoil
+```
 
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- `jsx` 와 `js` 나누기: 리액트 컴포넌트와 그렇지 않은 것들
