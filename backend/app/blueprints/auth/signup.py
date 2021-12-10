@@ -34,7 +34,7 @@ def user_signup():
         return jsonify(result="Registered nickname")
 
     password = generate_password_hash(password)
-    photo = "../static/uploads/basic_photo.png"
+    photo = "../static/uploads/basic_photo/basic_photo.png"
 
     user = User(email=email, password=password, nickname=nickname, photo=photo)
     db.session.add(user)
