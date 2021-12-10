@@ -11,7 +11,7 @@ def user_login():
     password = request.json["password"]
     login_user = User.query.filter(User.email == email).first()
 
-    if not login_user:g
+    if not login_user:
         return jsonify(result="Not Registered Email")
     if not check_password_hash(login_user.password, password):
         return jsonify(result="Email and Password don't match")
