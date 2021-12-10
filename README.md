@@ -51,7 +51,7 @@
       <tr>
         <td align=center>Javascript</td>
         <td align=center>JSX</td>
-        <td align=center>Python<br>3.7 | 3.8 </td>
+        <td align=center>Python<br>3.7</td>
         <td align=center>Flask</td>
         <td align=center>mySQL</td>
         <td align=center>SQL<br>Alchemy</td>
