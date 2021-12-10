@@ -4,14 +4,16 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import InputLabel from "@mui/material/InputLabel";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import BasicLayout from "../layouts/BasicLayout";
+import { readBoard } from "../apis/board";
+import DiaryListDropdown, {
+    UnicodeEmoMap,
+} from "../components/DiaryListDropdown";
 
 const mockups = [
     {
@@ -54,13 +56,6 @@ const mockups = [
     },
 ];
 
-const UnicodeEmoMap = {
-    smile: "\u{1F601}",
-    laugh: "\u{1F603}",
-    happy: "\u{1F604}",
-    cute: "\u{1F606}",
-};
-
 const NumHeart = ({ symped, num }) => {
     return (
         <IconButton>
@@ -79,15 +74,25 @@ const NumHeart = ({ symped, num }) => {
 };
 
 const OpenBoard = () => {
-    const [diaries, setDiaries] = useState([...mockups].reverse());
+    const [diaries, setDiaries] = useState([]);
+    const [immuDiaries, setImmuDiaries] = useState([...mockups].reverse());
     const [fromOld, setFromOld] = useState(false);
     const [sympOrder, setSympOrder] = useState(false);
     const [emotionFilter, setEmotionFilter] = useState("all");
     useEffect(() => {
         console.log("글 받아오기");
-        // 여기서 받아와서 diaries 에 set해주세요.
+        const fetchData = async () => {
+            try {
+                const data = await readBoard();
+                console.log(data);
+                // setDiaries(data);
+                // setDiaries(data); 오류가 나서 임시로 막아뒀습니다 서버 연결 후 풀어봐야할듯..?
+            } catch (e) {
+                console.log(e);
+            }
+        };
+        fetchData();
     }, []);
-
     useEffect(() => {
         if (sympOrder) {
             // if (fromOld) {
@@ -97,31 +102,22 @@ const OpenBoard = () => {
             // }
         } else {
             if (fromOld) {
-                setDiaries(mockups);
+                setDiaries(immuDiaries);
             } else {
-                setDiaries([...mockups].reverse());
+                setDiaries([...immuDiaries].reverse());
             }
         }
-    }, [sympOrder, fromOld]);
+    }, [sympOrder, fromOld, immuDiaries]);
 
     return (
         <BasicLayout>
             <Grid item xs={12}>
                 <Box>
                     <InputLabel id="emotion-select-label">감정</InputLabel>
-                    <Select
-                        labelId="emotion-select-label"
-                        id="emotion-select"
-                        value={emotionFilter}
-                        onChange={(e) => setEmotionFilter(e.target.value)}
-                        sx={{ minWidth: 200, mr: 2 }}
-                    >
-                        <MenuItem value={"all"}>All</MenuItem>
-                        <MenuItem value={"smile"}>{"\u{1F601}"}</MenuItem>
-                        <MenuItem value={"laugh"}>{"\u{1F603}"}</MenuItem>
-                        <MenuItem value={"happy"}>{"\u{1F604}"}</MenuItem>
-                        <MenuItem value={"cute"}>{"\u{1F606}"}</MenuItem>
-                    </Select>
+                    <DiaryListDropdown
+                        emotionFilter={emotionFilter}
+                        setEmotionFilter={setEmotionFilter}
+                    />
 
                     <FormControlLabel
                         control={
@@ -164,7 +160,7 @@ const OpenBoard = () => {
                                 minHeight: 100,
                                 p: 2,
                                 position: "relative",
-                                backgroundColor: "primary.light",
+                                backgroundColor: "secondary.dark",
                                 display: "flex",
                                 alignItems: "center",
                             }}

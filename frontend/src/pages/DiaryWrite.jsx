@@ -37,7 +37,7 @@ const DiaryWrite = () => {
                     }}
                     elevation={5}
                 >
-                    <BasicEditor selectedDate={numDate} />
+                    <BasicEditor selectedDate={numDate} id={numDate} />
                 </Paper>
             </Grid>
             <Grid

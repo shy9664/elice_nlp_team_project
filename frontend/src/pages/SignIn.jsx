@@ -37,22 +37,22 @@ const SignIn = () => {
 
             console.log(userInfo);
             if (userInfo) {
-                const p =
-                    userInfo.photo ||
-                    "https://static.wikia.nocookie.net/powerpuff/images/d/d2/Bubbles_HD.png";
-                const n = userInfo.nickname || "버블스";
+                const p = userInfo.photo;
+                const n = userInfo.nickname;
                 setPhoto(p);
                 setNickname(n);
                 localStorage.setItem("nickname", n);
                 localStorage.setItem("photo", p);
+                const id = setTimeout(() => {
+                    navigate("/");
+                }, 500);
+                return () => {
+                    clearTimeout(id);
+                };
             } else {
-                alert(
-                    "서버에서 잘못된 응답이 전송되었습니다! 로그인 멈춰!"
-                );
+                alert("서버에서 잘못된 응답이 전송되었습니다! 로그인 멈춰!");
+                return;
             }
-            setTimeout(() => {
-                navigate("/");
-            }, 500);
         } catch (e) {
             console.log(e);
         }

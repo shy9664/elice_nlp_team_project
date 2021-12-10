@@ -8,20 +8,20 @@ import getUrl from "./getUrl";
  * @returns
  */
 const signin = async (signinData) => {
-    const url = getUrl("/api/login"); // url 생성 => http://elice~~~~/login
-    try {
-        // => 일단 시도해보고, 에러가 나면 실행을 멈추고 => catch scope 안으로 들어가요.
-        const response = await axios.post(url, signinData, {
-            withCredential: true,
-        });
-        console.log("i am the response");
-        console.log(response);
-        return response.data;
+  const url = getUrl("/api/login"); // url 생성 => http://elice~~~~/login
+  try {
+    // => 일단 시도해보고, 에러가 나면 실행을 멈추고 => catch scope 안으로 들어가요.
+    const response = await axios.post(url, signinData, {
+      withCredential: true,
+    });
+    console.log("i am the response");
+    console.log(response);
+    return response.data;
 
-        // axios.post(~~).then(() => {}).catch((e) => {})
-    } catch (e) {
-        console.log(e);
-    }
+    // axios.post(~~).then(() => {}).catch((e) => {})
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 export default signin;

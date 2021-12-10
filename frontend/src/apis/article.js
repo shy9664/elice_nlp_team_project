@@ -26,7 +26,7 @@ export const createArticle = async (writeData) => {
  * @returns
  */
 export const updateArticle = async (date, writeData) => {
-    const url = getUrl(`/article/${date}`);
+    const url = getUrl(`/api/article/${date}`);
     try {
         const response = await axios.patch(url, { text: writeData });
         return response.data;
@@ -42,7 +42,7 @@ export const updateArticle = async (date, writeData) => {
  * @returns
  */
 export const deleteArticle = async (date) => {
-    const url = getUrl(`/article/${date}`);
+    const url = getUrl(`/api/article/${date}`);
     try {
         const response = await axios.delete(url);
         return response.data;
@@ -54,11 +54,17 @@ export const deleteArticle = async (date) => {
 /**
  * 글 읽기
  *
+ * date=diary.date.strftime("%Y-%m-%d"),
+ * text=diary.text,
+ * emotion=diary.emotion,
+ * is_shared=diary.is_shared,
+ * is_sharable=diary.is_sharable,
+ *
  * @param {string} date
- * @returns
+ * @returns {{date: string, text: string, emotion: string, is_shared: boolean, is_sharable: boolean}}}
  */
 export const readArticle = async (date) => {
-    const url = getUrl(`/article/${date}`);
+    const url = getUrl(`/api/article/${date}`);
     try {
         const response = await axios.get(url);
         return response.data;
@@ -67,36 +73,52 @@ export const readArticle = async (date) => {
     }
 };
 
-export const getArticle = async (date) => {
-    const url = `/article/${date}`;
-    let result;
-
-    await axios
-        .get(url)
-        .then(function (response) {
-            result = response.data;
-            console.log("일기 날짜로 조회 성공 => ", result);
-        })
-        .catch(function (error) {
-            console.log("일기 날짜로 조회 실패 => ", error);
-        });
-
-    return result;
+/**
+ * 감정 바꾸기
+ *
+ * @param {string} date
+ * @param {string} emotion
+ * @returns
+ */
+export const updateEmotion = async (date, emotion) => {
+    const url = getUrl(`/api/article/${date}/${emotion}`);
+    try {
+        const response = await axios.patch(url);
+        return response.data;
+    } catch (e) {
+        console.log(e);
+    }
 };
 
-export const getMyArticleList = async () => {
-    const url = `/article/my-list`;
-    let result;
+/**
+ * 공개 비공개
+ *
+ * @param {string} date
+ * @param {number} isShared
+ * @returns
+ */
+export const updateIsShared = async (date, isShared) => {
+    const url = getUrl(`/api/article/${date}/${isShared}`);
+    try {
+        const response = await axios.patch(url);
+        return response.data;
+    } catch (e) {
+        console.log(e);
+    }
+};
 
-    await axios
-        .get(url)
-        .then(function (response) {
-            result = response.data;
-            console.log("내 일기 조회 성공 => ", result);
-        })
-        .catch(function (error) {
-            console.log("내 일기 조회 실패 => ", error);
-        });
-
-    return result;
+/**
+ * 사용자의 모든 글 읽어오기
+ *
+ * @param {string}
+ * @returns
+ */
+export const readArticles = async () => {
+    const url = getUrl(`/api/article/my-list`);
+    try {
+        const response = await axios.get(url);
+        return response.data;
+    } catch (e) {
+        console.log(e);
+    }
 };

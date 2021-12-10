@@ -1,109 +1,131 @@
 import React, { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import LockIcon from "@mui/icons-material/Lock";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
-import InputLabel from "@mui/material/InputLabel";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import BasicLayout from "../layouts/BasicLayout";
+import ReadonlyEditor from "../components/ReadonlyEditor";
+import DiaryListDropdown, {
+    UnicodeEmoMap,
+} from "../components/DiaryListDropdown";
+import { readArticles } from "../apis/article";
+import { dateAtom } from "../recoils/diary";
+import { useNavigate } from "react-router";
 
-const mockups = [
-    {
-        date: "2021-11-15",
-        text: "아주 많은...",
-        emotion: "\u{1F601}",
-        is_shared: true,
-    },
-    {
-        date: "2021-11-16",
-        text: "내용돌...",
-        emotion: "\u{1F603}",
-        is_shared: true,
-    },
-    {
-        date: "2021-11-17",
-        text: "굴러가유...",
-        emotion: "\u{1F602}",
-        is_shared: false,
-    },
-    {
-        date: "2021-11-18",
-        text: "백엔드가 없어서",
-        emotion: "\u{1F604}",
-        is_shared: false,
-    },
-    {
-        date: "2021-11-19",
-        text: "한계가 있어요.",
-        emotion: "\u{1F605}",
-        is_shared: false,
-    },
-    {
-        date: "2021-11-20",
-        text: "아왜안되냐고",
-        emotion: "\u{1F606}",
-        is_shared: true,
-    },
-];
+const DiaryItem = ({ diary }) => {
+    const [date, setDate] = useRecoilState(dateAtom);
+    const navi = useNavigate();
+    const handleClick = () => {
+        setDate(new Date(diary.date));
+        navi("/diary/done");
+    };
 
-const UnicodeEmoMap = {
-    smile: "\u{1F601}",
-    laugh: "\u{1F603}",
-    happy: "\u{1F604}",
-    cute: "\u{1F606}",
+    return (
+        <Paper
+            key={diary.date}
+            sx={{
+                m: 2,
+                minHeight: 100,
+                height: 140,
+                overflow: "hidden",
+                p: 2,
+                position: "relative",
+                ":hover": {
+                    boxShadow: 6,
+                    cursor: "pointer",
+                },
+            }}
+            onClick={() => {
+                handleClick();
+            }}
+        >
+            <Typography variant="h6">
+                {diary.date} {diary.emotion}
+            </Typography>
+            <ReadonlyEditor
+                selectedDate={diary.date}
+                id={diary.date}
+                disablePlugins
+            />
+            <Box
+                sx={{
+                    position: "absolute",
+                    right: 0,
+                    top: 0,
+                    p: 3,
+                }}
+            >
+                {diary.is_shared ? <LockOpenIcon /> : <LockIcon />}
+            </Box>
+        </Paper>
+    );
 };
 
 const DiaryList = () => {
-    const [diaries, setDiaries] = useState([...mockups].reverse());
+    const [diaries, setDiaries] = useState([]);
+    const [immudiaries, setImmudiaries] = useState(() => {
+        const listStr = localStorage.getItem("diaryContents") || "[]";
+        const list = JSON.parse(listStr);
+        return list;
+    });
     const [fromOld, setFromOld] = useState(false);
     const [isPublic, setIsPublic] = useState(false);
     const [emotionFilter, setEmotionFilter] = useState("all");
+
     useEffect(() => {
-        console.log("글 받아오기");
-        // 여기서 받아와서 diaries 에 set해주세요.
+        const fetchData = async () => {
+            try {
+                console.log("글 받아오기");
+                const articles = await readArticles();
+
+                console.log(articles);
+                if (!articles) {
+                    const listStr =
+                        localStorage.getItem("diaryContents") || "[]";
+                    const list = JSON.parse(listStr);
+                    setDiaries(list);
+                    return;
+                }
+                setDiaries(articles);
+                setImmudiaries(articles);
+            } catch (e) {
+                console.log(e);
+            }
+        };
+        fetchData();
     }, []);
 
-    useEffect(() => {''
+    useEffect(() => {
         if (isPublic) {
             if (fromOld) {
-                setDiaries(mockups.filter((diary) => diary.is_shared));
-            } else {
                 setDiaries(
-                    mockups.filter((diary) => diary.is_shared).reverse()
+                    immudiaries.filter((diary) => diary.is_shared).reverse()
                 );
+            } else {
+                setDiaries(immudiaries.filter((diary) => diary.is_shared));
             }
         } else {
             if (fromOld) {
-                setDiaries(mockups);
+                setDiaries([...immudiaries].reverse());
             } else {
-                setDiaries([...mockups].reverse());
+                setDiaries(immudiaries);
             }
         }
-    }, [isPublic, fromOld]);
+    }, [isPublic, fromOld, immudiaries]);
 
     return (
         <BasicLayout>
             <Grid item xs={12}>
                 <Box>
-                    <InputLabel id="emotion-select-label">감정</InputLabel>
-                    <Select
-                        labelId="emotion-select-label"
-                        id="emotion-select"
-                        value={emotionFilter}
-                        onChange={(e) => setEmotionFilter(e.target.value)}
-                        sx={{ minWidth: 200, mr: 2 }}
-                    >
-                        <MenuItem value={"all"}>All</MenuItem>
-                        <MenuItem value={"smile"}>{"\u{1F601}"}</MenuItem>
-                        <MenuItem value={"laugh"}>{"\u{1F603}"}</MenuItem>
-                        <MenuItem value={"happy"}>{"\u{1F604}"}</MenuItem>
-                        <MenuItem value={"cute"}>{"\u{1F606}"}</MenuItem>
-                    </Select>
+                    <DiaryListDropdown
+                        emotionFilter={emotionFilter}
+                        setEmotionFilter={setEmotionFilter}
+                    />
 
                     <FormControlLabel
                         control={
@@ -135,41 +157,13 @@ const DiaryList = () => {
                         emotionFilter !== "all" &&
                         UnicodeEmoMap[emotionFilter] !== diary.emotion
                     ) {
-                        // eslint-disable-next-line array-callback-return
-                        return;
+                        console.log(diary);
+                        console.log(UnicodeEmoMap);
+                        console.log(UnicodeEmoMap[emotionFilter]);
+                        console.log(diary.emotion);
+                        return <div key={diary.date}></div>;
                     }
-                    return (
-                        <Paper
-                            key={diary.date}
-                            sx={{
-                                m: 2,
-                                minHeight: 100,
-                                p: 2,
-                                position: "relative",
-                            }}
-                        >
-                            <Typography variant="h6">
-                                {diary.date} {diary.emotion}
-                            </Typography>
-                            <Typography variant="body1">
-                                {diary.text}
-                            </Typography>
-                            <Box
-                                sx={{
-                                    position: "absolute",
-                                    right: 0,
-                                    top: 0,
-                                    p: 3,
-                                }}
-                            >
-                                {diary.is_shared ? (
-                                    <LockOpenIcon />
-                                ) : (
-                                    <LockIcon />
-                                )}
-                            </Box>
-                        </Paper>
-                    );
+                    return <DiaryItem key={diary.date} diary={diary} />;
                 })}
             </Grid>
         </BasicLayout>

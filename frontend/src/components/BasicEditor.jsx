@@ -1,32 +1,14 @@
 import React from "react";
 import {
     Plate,
-    ELEMENT_PARAGRAPH,
-    ELEMENT_H1,
-    ELEMENT_H2,
-    ELEMENT_H3,
-    ELEMENT_H4,
-    ELEMENT_H5,
-    ELEMENT_H6,
-    // MARK_CODE,
     createParagraphPlugin,
     createBlockquotePlugin,
-    createCodeBlockPlugin,
     createHeadingPlugin,
-    createAlignPlugin,
-    createBasicMarksPlugin,
-    createFontColorPlugin,
-    createFontBackgroundColorPlugin,
-    createFontSizePlugin,
-    // createCodePlugin,
     createPlugins,
     createPlateUI,
     HeadingToolbar,
 } from "@udecode/plate";
 import BasicEditorToolbar from "./BasicEditorToolbar";
-import AlignToolbarButtons from "./AlignToolbarButtons";
-import BasicMarkToolbarButtons from "./BasicMarkToolbarButtons";
-import FontToolbarButtons from "./FontToolbarButtons";
 
 const editableProps = {
     placeholder: "내용을 입력해 주세요…",
@@ -35,44 +17,18 @@ const editableProps = {
     },
 };
 
-const BasicEditor = ({ selectedDate }) => {
-    
-
+const BasicEditor = ({ selectedDate, id }) => {
     const initVal = () => {
         const str = localStorage.getItem(selectedDate);
         return JSON.parse(str);
     };
-
-    
 
     const plugins = createPlugins(
         [
             // elements
             createParagraphPlugin(), // paragraph element
             createBlockquotePlugin(), // blockquote element
-            createCodeBlockPlugin(), // code block element
             createHeadingPlugin(), // heading elements
-
-            // marks
-            // createCodePlugin(), // code mark
-            createAlignPlugin({
-                inject: {
-                    props: {
-                        validTypes: [
-                            ELEMENT_PARAGRAPH,
-                            ELEMENT_H1,
-                            ELEMENT_H2,
-                            ELEMENT_H3,
-                            ELEMENT_H4,
-                            ELEMENT_H5,
-                            ELEMENT_H6,
-                        ],
-                    },
-                },
-            }),
-            createBasicMarksPlugin(), // 진하게 등등
-            createFontColorPlugin(),
-            createFontBackgroundColorPlugin(),
         ],
         {
             components: createPlateUI(),
@@ -82,7 +38,7 @@ const BasicEditor = ({ selectedDate }) => {
     return (
         <>
             <Plate
-                id="1"
+                id={id ?? "1"}
                 editableProps={editableProps}
                 initialValue={initVal()}
                 plugins={plugins}
@@ -101,7 +57,6 @@ const BasicEditor = ({ selectedDate }) => {
                     }}
                 >
                     <BasicEditorToolbar />
-
                 </HeadingToolbar>
             </Plate>
         </>

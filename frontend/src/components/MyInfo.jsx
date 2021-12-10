@@ -1,15 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import TextField from "@mui/material/TextField";
-import { photo as ptatom, nickname as nkatom } from "../recoils/userInfo";
+import Button from "@mui/material/Button";
+import {
+    photo as ptatom,
+    nickname as nkatom,
+    password as pwatom,
+    passwordRetry as pwReatom,
+} from "../recoils/userInfo";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
+import { readUser } from "../apis/user";
 
 const MyInfo = () => {
     const [nickname, setNickname] = useRecoilState(nkatom);
+    const [pw, setPw] = useRecoilState(pwatom);
+    const [pwRt, setPwRt] = useRecoilState(pwReatom);
     const [photo, setPhoto] = useRecoilState(ptatom);
+    const [email, setEmail] = useState("immutable@email.com");
 
-    const [pw, setPw] = useState("");
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const userinfo = await readUser();
+                if (userinfo.nickname) {
+                    setNickname(userinfo.nickname);
+                }
+                // setPhoto(userinfo.photo); 포토는 안받아도 똑같을 것
+                if (userinfo.email) {
+                    setEmail(userinfo.email);
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        };
+        fetchData();
+    }, []);
 
     return (
         <Box
@@ -33,6 +59,7 @@ const MyInfo = () => {
                     mb: 2,
                 }}
             />
+            <Button variant="outlined">프로필 사진 변경</Button>
             <TextField
                 sx={{ m: 2 }}
                 label="닉네임"
@@ -44,7 +71,7 @@ const MyInfo = () => {
                 sx={{ m: 2 }}
                 label="이메일"
                 disabled
-                defaultValue="immutable@email.com"
+                value={email}
                 variant="filled"
             />
             <TextField
@@ -54,6 +81,14 @@ const MyInfo = () => {
                 variant="filled"
                 value={pw}
                 onChange={() => setPw()}
+            />
+            <TextField
+                type="password"
+                sx={{ m: 2 }}
+                label="비밀번호 확인"
+                variant="filled"
+                value={pwRt}
+                onChange={() => setPwRt()}
             />
         </Box>
     );

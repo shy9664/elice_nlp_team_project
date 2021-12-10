@@ -7,10 +7,10 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import StaticDatePicker from "@mui/lab/StaticDatePicker";
 
 import { useRecoilState } from "recoil";
-import { selectedDateMainAtom } from "../recoils/cal";
+import { dateAtom } from "../recoils/diary";
 
 export const Calendar = () => {
-    const [value, setValue] = useRecoilState(selectedDateMainAtom);
+    const [value, setValue] = useRecoilState(dateAtom);
 
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns}>

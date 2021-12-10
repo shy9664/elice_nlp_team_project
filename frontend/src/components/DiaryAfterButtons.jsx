@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { usePlateValue } from "@udecode/plate-core";
@@ -9,17 +9,29 @@ import Checkbox from "@mui/material/Checkbox";
 import Modal from "@mui/material/Modal";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import { dateAtom, isUpdateNow } from "../recoils/diary";
-import { deleteArticle } from "../apis/article";
+import {
+    dateAtom,
+    isUpdateNow,
+    isAnony as isatom,
+    emotion as emoatom,
+    isSharable,
+} from "../recoils/diary";
+import { deleteArticle, updateIsShared } from "../apis/article";
 
 const DiaryAfterButtons = () => {
     const [isModalOpened, setIsModalOpened] = useState(false);
-    const [withAnony, setWidthAnony] = useState(false);
-    const [wasYes, setWasYes] = useState(false); // NOTE: 이거는 백엔드 작동하면 없앨거임
+    const [isErrorModalOpened, setIsErrorModalOpened] = useState(false);
+    const [wasYes, setWasYes] = useState(false);
+
     const editorValue = usePlateValue();
     const navi = useNavigate();
+
     const [date, setDate] = useRecoilState(dateAtom);
     const [isUpdate, setIsUpdate] = useRecoilState(isUpdateNow);
+    const [withAnony, setWithAnony] = useRecoilState(isatom);
+    const [emotion, setEmotion] = useRecoilState(emoatom);
+    const [sharability, setSharability] = useRecoilState(isSharable);
+
     const yearStr = date.getFullYear();
     const monthNum = date.getMonth() + 1;
     const dateNum = date.getDate();
@@ -38,6 +50,44 @@ const DiaryAfterButtons = () => {
         setIsModalOpened(true);
     };
 
+    const doShare = async () => {
+        // 만약 셰어가 불가능한데 셰어를 시도할 경우
+        if (!sharability && !withAnony) {
+            console.log("공유 불가능!");
+            setIsErrorModalOpened(true);
+            return;
+        }
+
+        try {
+            await updateIsShared(otherNumDate, !withAnony ? 1 : 0);
+        } catch (e) {
+            console.log(e);
+        }
+
+        // 로컬 내부
+        const prev = localStorage.getItem("diaryContents") || "[]";
+        const prevList = JSON.parse(prev);
+        const one = prevList.filter((ele) => ele.date === numDate)[0];
+        if (one) {
+            const newOne = {
+                ...one,
+                is_shared: !withAnony,
+                emotion: emotion,
+            };
+
+            // 새글 정보
+            console.log(newOne);
+
+            const nowList = prevList.filter((ele) => ele.date !== numDate);
+            nowList.push(newOne);
+            nowList.sort((f, s) => {
+                return f.date > s.date ? -1 : 1;
+            });
+            const nowStr = JSON.stringify(nowList);
+            localStorage.setItem("diaryContents", nowStr);
+        }
+    };
+
     const revise = async () => {
         console.log(`글쓰기 수정: ${isUpdate}`);
         setIsUpdate(true);
@@ -52,6 +102,10 @@ const DiaryAfterButtons = () => {
             console.log(e);
         }
         localStorage.removeItem(numDate);
+        const prev = localStorage.getItem("diaryContents") || "[]";
+        const prevList = JSON.parse(prev);
+        const nowList = prevList.filter((ele) => ele.date !== numDate);
+        localStorage.setItem("diaryContents", JSON.stringify(nowList));
         navi("/");
     };
 
@@ -71,6 +125,34 @@ const DiaryAfterButtons = () => {
                     삭제
                 </Button>
             </Box>
+
+            <Modal
+                open={isErrorModalOpened}
+                onClose={() => isErrorModalOpened(false)}
+            >
+                <Paper
+                    sx={{
+                        outline: "none",
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        width: 400,
+                        boxShadow: 24,
+                        p: 4,
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "space-around",
+                        alignItems: "center",
+                        maxWidth: 400,
+                    }}
+                >
+                    <Typography sx={{ mb: 4 }} variant="h5">
+                        현재 입력하신 글에 욕설이나 비방이 포함되어 있어 공개가
+                        불가능합니다!
+                    </Typography>
+                </Paper>
+            </Modal>
             <Modal
                 open={isModalOpened}
                 onClose={() => {
@@ -108,7 +190,7 @@ const DiaryAfterButtons = () => {
                             >
                                 <Button
                                     onClick={() => {
-                                        alert("공개된 글을 보러갔습니다!");
+                                        navi("/diary");
                                     }}
                                     variant="contained"
                                 >
@@ -131,7 +213,7 @@ const DiaryAfterButtons = () => {
                             </Typography>
                             <Checkbox
                                 checked={withAnony}
-                                onChange={() => setWidthAnony(!withAnony)}
+                                onChange={() => setWithAnony(!withAnony)}
                             />
                             <Typography sx={{ mb: 4 }} variant="h6">
                                 익명으로 공유하기
@@ -144,8 +226,9 @@ const DiaryAfterButtons = () => {
                                 }}
                             >
                                 <Button
-                                    onClick={() => {
+                                    onClick={async () => {
                                         setWasYes(true);
+                                        await doShare();
                                     }}
                                     variant="contained"
                                 >

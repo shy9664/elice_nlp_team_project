@@ -3,15 +3,15 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import InputLabel from "@mui/material/InputLabel";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import BasicLayout from "../layouts/BasicLayout";
+import DiaryListDropdown, {
+    UnicodeEmoMap,
+} from "../components/DiaryListDropdown";
 
 const mockups = [
     {
@@ -19,6 +19,7 @@ const mockups = [
         text: "많고 많은",
         emotion: "\u{1F601}",
         article_id: true,
+        symped: true,
     },
     {
         date: "2021-11-16",
@@ -29,7 +30,7 @@ const mockups = [
     {
         date: "2021-11-17",
         text: "안녕! 생선대가리!",
-        emotion: "\u{1F602}",
+        emotion: "\u{1F620}",
         article_id: false,
     },
     {
@@ -37,12 +38,14 @@ const mockups = [
         text: "이제 우리 둘뿐이네!",
         emotion: "\u{1F604}",
         article_id: false,
+        symped: true,
     },
     {
         date: "2021-11-19",
         text: "콰광!",
-        emotion: "\u{1F605}",
+        emotion: "\u{1F61E}",
         article_id: false,
+        symped: true,
     },
     {
         date: "2021-11-20",
@@ -52,15 +55,8 @@ const mockups = [
     },
 ];
 
-const UnicodeEmoMap = {
-    smile: "\u{1F601}",
-    laugh: "\u{1F603}",
-    happy: "\u{1F604}",
-    cute: "\u{1F606}",
-};
-
-const Heart = () => {
-    const [symped, setSymped] = useState(false);
+const Heart = ({ sym }) => {
+    const [symped, setSymped] = useState(sym ?? false);
     return (
         <IconButton
             onClick={() => {
@@ -75,7 +71,6 @@ const Heart = () => {
 const SympDiaryList = () => {
     const [diaries, setDiaries] = useState([...mockups].reverse());
     const [fromOld, setFromOld] = useState(false);
-    const [sympOrder, setSympOrder] = useState(false);
     const [emotionFilter, setEmotionFilter] = useState("all");
     useEffect(() => {
         console.log("글 받아오기");
@@ -83,40 +78,23 @@ const SympDiaryList = () => {
     }, []);
 
     useEffect(() => {
-        if (sympOrder) {
-            // if (fromOld) {
-            //     setDiaries(mockups.filter((diary) => diary));
-            // } else {
-            //     setDiaries(mockups.filter((diary) => diary).reverse());
-            // }
+        if (fromOld) {
+            setDiaries(mockups);
         } else {
-            if (fromOld) {
-                setDiaries(mockups);
-            } else {
-                setDiaries([...mockups].reverse());
-            }
+            setDiaries([...mockups].reverse());
         }
-    }, [sympOrder, fromOld]);
+    }, [fromOld]);
 
     return (
         <BasicLayout>
             <Grid item xs={12}>
                 <Box>
-                    <InputLabel id="emotion-select-label">감정</InputLabel>
-                    <Select
-                        labelId="emotion-select-label"
-                        id="emotion-select"
-                        value={emotionFilter}
-                        onChange={(e) => setEmotionFilter(e.target.value)}
-                        sx={{ minWidth: 200, mr: 2 }}
-                    >
-                        <MenuItem value={"all"}>All</MenuItem>
-                        <MenuItem value={"smile"}>{"\u{1F601}"}</MenuItem>
-                        <MenuItem value={"laugh"}>{"\u{1F603}"}</MenuItem>
-                        <MenuItem value={"happy"}>{"\u{1F604}"}</MenuItem>
-                        <MenuItem value={"cute"}>{"\u{1F606}"}</MenuItem>
-                    </Select>
-
+                    {/* 다이어리 감정 드롭다운  */}
+                    <DiaryListDropdown
+                        emotionFilter={emotionFilter}
+                        setEmotionFilter={setEmotionFilter}
+                    />
+                    {/* 체크박스 오래된 거부터 */}
                     <FormControlLabel
                         control={
                             <Checkbox
@@ -127,17 +105,6 @@ const SympDiaryList = () => {
                             />
                         }
                         label="오래된것부터보기"
-                    />
-                    <FormControlLabel
-                        control={
-                            <Checkbox
-                                value={sympOrder}
-                                onChange={() => {
-                                    setSympOrder(!sympOrder);
-                                }}
-                            />
-                        }
-                        label="공감 많은순"
                     />
                 </Box>
             </Grid>
@@ -174,7 +141,7 @@ const SympDiaryList = () => {
                                     p: 3,
                                 }}
                             >
-                                <Heart />
+                                <Heart sym={diary.symped} />
                             </Box>
                         </Paper>
                     );

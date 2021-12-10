@@ -15,6 +15,8 @@ const pagesInfo = [
     {
         text: "일기 쓰기",
         url: "/diary/write",
+        color: "#dddddd",
+        backColor: "#560027",
     },
     {
         text: "목록",
@@ -99,6 +101,14 @@ const Sidebar = () => {
                         <ListItem key={pInfo.text} disablePadding>
                             <ListItemButton
                                 onClick={naviHandlerFunc(pInfo.url)}
+                                sx={
+                                    pInfo.color
+                                        ? {
+                                              color: pInfo.color,
+                                              backgroundColor: pInfo.backColor,
+                                          }
+                                        : undefined
+                                }
                             >
                                 <ListItemText primary={pInfo.text} />
                             </ListItemButton>

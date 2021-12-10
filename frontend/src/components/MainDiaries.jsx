@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useRecoilState } from "recoil";
-import { selectedDateMainAtom } from "../recoils/cal";
-import { useNavigate } from "react-router";
+import { dateAtom } from "../recoils/diary";
 import ReadonlyEditor from "./ReadonlyEditor";
 
 const MainDiaries = () => {
     const navi = useNavigate();
-    const [date, setDate] = useRecoilState(selectedDateMainAtom);
+    const [date, setDate] = useRecoilState(dateAtom);
     const [fullDate, setFullDate] = useState("");
     const [fullDateString, setFullDateString] = useState("");
     const [contentData, setContentData] = useState("");
@@ -31,9 +31,12 @@ const MainDiaries = () => {
         next && next !== contentData
             ? setContentData("loading")
             : setContentData("");
-        setTimeout(() => {
+        const id = setTimeout(() => {
             setContentData(next);
         }, 10);
+        return () => {
+            clearTimeout(id);
+        };
     }, [fullDate]);
 
     // useEffect(() => {}, [contentData]);
@@ -52,15 +55,11 @@ const MainDiaries = () => {
                 </>
             ) : (
                 <>
-                    <Typography sx={{ mt: 1, mb: 1 }}>
+                    <Typography  sx={{ mt: 3, mb: 3, fontSize: 17 }}>
                         일기가 없어요ㅠㅠ
                     </Typography>
-                    <Button
-                        onClick={() => goWriteDiary()}
-                        variant="contained"
-                        // color="secondary"
-                    >
-                        <Typography>{">>"} 오늘이라도 일기를 쓰자!</Typography>
+                    <Button onClick={() => goWriteDiary()} variant="contained">
+                        <Typography>{">>"} 일기 쓰러 가기</Typography>
                     </Button>
                 </>
             )}

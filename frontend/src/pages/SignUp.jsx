@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -13,6 +14,7 @@ import Logo from "../components/Logo";
 import signup from "../apis/signup";
 
 export default function SignUp() {
+    const navi = useNavigate();
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -22,8 +24,13 @@ export default function SignUp() {
             password_check: data.get("passwordCheck"),
             nickname: data.get("nickname"),
         };
-        const response = await signup(jsonData);
-        console.log(response);
+        try {
+            const response = await signup(jsonData);
+            console.log(response);
+            navi("/");
+        } catch (e) {
+            console.log(e);
+        }
     };
 
     return (
