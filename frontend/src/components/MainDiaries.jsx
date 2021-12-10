@@ -15,6 +15,7 @@ const MainDiaries = () => {
     const [contentData, setContentData] = useState("");
 
     useEffect(() => {
+        // date 가 바뀌면
         const yearStr = date.getFullYear();
         const monthNum = date.getMonth() + 1;
         const dateNum = date.getDate();
@@ -22,11 +23,13 @@ const MainDiaries = () => {
         const dateStr = dateNum < 10 ? `0${dateNum}` : dateNum;
         const numDate = `${yearStr}-${monthStr}-${dateStr}`;
         const strDate = `${yearStr}년 ${monthNum}월 ${dateNum}일`;
-        setFullDateString(strDate);
-        setFullDate(numDate);
+        setFullDateString(strDate); // 2020년 ~ 월 ~ 일
+        setFullDate(numDate); // 2020-11-11
     }, [date]);
 
     useEffect(() => {
+        
+        // keep localStorage
         const next = localStorage.getItem(fullDate);
         next && next !== contentData
             ? setContentData("loading")
@@ -51,11 +54,11 @@ const MainDiaries = () => {
                 <Box sx={{ height: 200 }}></Box>
             ) : contentData ? (
                 <>
-                    <ReadonlyEditor selectedDate={contentData} isDataContent />
+                    <ReadonlyEditor content={contentData} id={fullDate} />
                 </>
             ) : (
                 <>
-                    <Typography  sx={{ mt: 3, mb: 3, fontSize: 17 }}>
+                    <Typography sx={{ mt: 3, mb: 3, fontSize: 17 }}>
                         일기가 없어요ㅠㅠ
                     </Typography>
                     <Button onClick={() => goWriteDiary()} variant="contained">

@@ -30,44 +30,58 @@ const DiaryWriteButtons = () => {
 
     const submit = async () => {
         console.log("글쓰기 저장");
+
+        // 에디터 내용 긁어오기
         const contentString = JSON.stringify(editorValue);
+
+        // 날짜정보 불러오기
         const yearStr = date.getFullYear();
         const monthNum = date.getMonth() + 1;
         const dateNum = date.getDate();
         const monthStr = monthNum < 10 ? `0${monthNum}` : monthNum;
         const dateStr = dateNum < 10 ? `0${dateNum}` : dateNum;
-        const numDate = `${yearStr}-${monthStr}-${dateStr}`;
-        const otherNumDate = `${yearStr}${monthStr}${dateStr}`;
+        const numDate = `${yearStr}-${monthStr}-${dateStr}`; // 로컬스토리지용
+        const otherNumDate = `${yearStr}${monthStr}${dateStr}`; // 백엔드요청부용
 
-        // localStorage.setItem("diaryContent", contentString);
+        // 글쓰다 만 거 불러오기 할 때 쓰려고 할 때 위함
         localStorage.setItem(numDate, contentString);
-
-        // 추가
 
         try {
             // 처음에 이미 작성된 글이 있는지 확인
             const res = await readArticle(otherNumDate);
 
-            // 있으면 업데이트임
+            // 글이 있으면 새로 쓰는게 아니라 업데이트를 콜해야함
             if (res) {
+                // 업데이트면 셋해줌
                 setIsUpdating(true);
+            } else {
+                setIsUpdating(false);
             }
 
-            let response;
+            // 업데이팅 중이면
             if (isUpdating) {
-                response = await updateArticle(otherNumDate, contentString);
+                // 업데이트 받아오기
+                const response = await updateArticle(
+                    otherNumDate,
+                    contentString
+                );
+                if (!response || response.status !== 200) {
+                    alert("글 업데이트가 정상적으로 처리되지 않음!");
+                    return;
+                }
             } else {
-                response = await createArticle({
+                const response = await createArticle({
                     text: contentString,
                     date: Number(otherNumDate),
                 });
+                if (!response || response.status !== 200) {
+                    alert("글 작성 및 업데이트가 정상적으로 처리되지 않음!");
+                    return;
+                }
             }
-            if (!response) {
-                alert("글 작성 및 업데이트가 정상적으로 처리되지 않음!");
-                return;
-            }
-            console.log("글 작성 및 업데이트 됨. 감정 설정 하는 중...");
-            // 해당 글을 다시 받음
+            console.log("글 작성 및 업데이트 됨.");
+
+            // 감정설정까지 완료되어서 해당 글을 다시 받음
             const resAgain = await readArticle(otherNumDate);
 
             if (!resAgain || !resAgain.date) {
@@ -77,29 +91,9 @@ const DiaryWriteButtons = () => {
             }
 
             // 지금 이 글에 대하여...
-            setSharability(resAgain.is_sharable);
-            setEmotion(resAgain.emotion);
-            setIsPrivate(!resAgain.is_shared);
-
-            // 받아온걸로 해줘야하는데..
-
-            // 로컬에서의 코드...
-            const wholeInfo = {
-                text: contentString,
-                date: numDate,
-                is_shared: !isPrivate || false,
-                emotion: UnicodeEmoMap[emotion] || UnicodeEmoMap["sadness"],
-            };
-
-            const prev = localStorage.getItem("diaryContents") || "[]";
-            const prevList = JSON.parse(prev);
-            const nowList = prevList.filter((ele) => ele.date !== numDate);
-            nowList.push(wholeInfo);
-            nowList.sort((f, s) => {
-                return f.date > s.date ? -1 : 1;
-            });
-            const nowStr = JSON.stringify(nowList);
-            localStorage.setItem("diaryContents", nowStr);
+            setSharability(resAgain.is_sharable); // 공유가능함?
+            setEmotion(resAgain.emotion); // 감정은?
+            setIsPrivate(!resAgain.is_shared); // 공유여부는?
 
             // 모든 작업이 끝났으므로 상세페이지로
             navi("/diary/done");

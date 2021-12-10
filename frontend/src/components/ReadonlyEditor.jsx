@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
     Plate,
     createParagraphPlugin,
@@ -18,12 +18,7 @@ const editableProps = {
     readOnly: true,
 };
 
-const ReadonlyEditor = ({
-    selectedDate,
-    isDataContent,
-    id,
-    disablePlugins,
-}) => {
+const ReadonlyEditor = ({ content, id }) => {
     const plugins = createPlugins(
         [
             // elements
@@ -41,12 +36,8 @@ const ReadonlyEditor = ({
             <Plate
                 id={id ?? "1"}
                 editableProps={editableProps}
-                value={
-                    isDataContent
-                        ? JSON.parse(selectedDate)
-                        : JSON.parse(localStorage.getItem(selectedDate))
-                }
-                plugins={disablePlugins ? undefined : plugins}
+                value={JSON.parse(content)}
+                plugins={plugins}
             ></Plate>
         </>
     );

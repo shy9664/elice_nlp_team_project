@@ -45,13 +45,9 @@ const DiaryItem = ({ diary }) => {
             }}
         >
             <Typography variant="h6">
-                {diary.date} {diary.emotion}
+                {diary.date} {UnicodeEmoMap[diary.emotion]}
             </Typography>
-            <ReadonlyEditor
-                selectedDate={diary.date}
-                id={diary.date}
-                disablePlugins
-            />
+            <ReadonlyEditor content={diary.text} id={diary.date} />
             <Box
                 sx={{
                     position: "absolute",
@@ -68,11 +64,7 @@ const DiaryItem = ({ diary }) => {
 
 const DiaryList = () => {
     const [diaries, setDiaries] = useState([]);
-    const [immudiaries, setImmudiaries] = useState(() => {
-        const listStr = localStorage.getItem("diaryContents") || "[]";
-        const list = JSON.parse(listStr);
-        return list;
-    });
+    const [immudiaries, setImmudiaries] = useState([]);
     const [fromOld, setFromOld] = useState(false);
     const [isPublic, setIsPublic] = useState(false);
     const [emotionFilter, setEmotionFilter] = useState("all");
@@ -83,16 +75,12 @@ const DiaryList = () => {
                 console.log("글 받아오기");
                 const articles = await readArticles();
 
-                console.log(articles);
                 if (!articles) {
-                    const listStr =
-                        localStorage.getItem("diaryContents") || "[]";
-                    const list = JSON.parse(listStr);
-                    setDiaries(list);
+                    alert("잘못된 응답!");
                     return;
                 }
-                setDiaries(articles);
                 setImmudiaries(articles);
+                setDiaries(articles);
             } catch (e) {
                 console.log(e);
             }
@@ -151,6 +139,7 @@ const DiaryList = () => {
                     />
                 </Box>
             </Grid>
+            {/* 이게 실제 아이템들 */}
             <Grid item xs={12} sx={{ maxHeight: 630, overflow: "scroll" }}>
                 {diaries.map((diary) => {
                     if (

@@ -11,6 +11,7 @@ import {
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import { readUser } from "../apis/user";
+import MyInfoImageButtons from "./MyInfoImageButtons";
 
 const MyInfo = () => {
     const [nickname, setNickname] = useRecoilState(nkatom);
@@ -59,7 +60,7 @@ const MyInfo = () => {
                     mb: 2,
                 }}
             />
-            <Button variant="outlined">프로필 사진 변경</Button>
+            <MyInfoImageButtons />
             <TextField
                 sx={{ m: 2 }}
                 label="닉네임"

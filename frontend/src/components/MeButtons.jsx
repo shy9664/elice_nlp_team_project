@@ -10,18 +10,16 @@ const MyInfoButtons = () => {
     const [photo, setPhoto] = useRecoilState(ptatom);
     const navi = useNavigate();
     const logout = () => {
+        // 로그아웃 없는데요?ㅠㅠ
         console.log("로그아웃되었습니다.");
-        localStorage.clear();
-        setNickname("");
-        setPhoto("");
-        console.log(nickname);
-        console.log(photo);
         navi("/signin");
     };
+
     const toMyInfo = () => {
         console.log("내정보로");
         navi("/me");
     };
+
     return (
         <>
             <Button
@@ -32,6 +30,7 @@ const MyInfoButtons = () => {
             >
                 <Typography>내 정보</Typography>
             </Button>
+
             <Button
                 onClick={() => logout()}
                 variant="contained"

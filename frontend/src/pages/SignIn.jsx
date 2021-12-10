@@ -23,56 +23,58 @@ const SignIn = () => {
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
+        // submit default event 로 인한 화면 refresh 막음
         event.preventDefault();
+
+        // formdata 에서 데이터 추출
         const data = new FormData(event.currentTarget);
         const jsonData = {
             email: data.get("email"),
             password: data.get("password"),
         };
 
+        // json data 요청 전에 확인
         console.log(jsonData);
 
         try {
+            // 로그인 요청보내기
             const userInfo = await signin(jsonData);
 
+            // 요청에 대한 응답
             console.log(userInfo);
-            if (userInfo) {
+
+            //데이터 객체 자체가 오지 않았을 경우
+            if (!userInfo) {
+                alert("잘못된 응답!");
+                return;
+            }
+            const p = userInfo.photo;
+            const n = userInfo.nickname;
+
+            // status 코드가 200으로 일괄 세팅되기 때문에 응답으로 오는 데이터를 판단
+            if (p && n) {
+                // 포토 부분과 닉네임 넣어주기
                 const p = userInfo.photo;
                 const n = userInfo.nickname;
+
+                // recoil 전체 state 업데이트
                 setPhoto(p);
                 setNickname(n);
-                localStorage.setItem("nickname", n);
-                localStorage.setItem("photo", p);
+
+                //0.5 초 후에 navigate
                 const id = setTimeout(() => {
                     navigate("/");
                 }, 500);
                 return () => {
+                    // clean up code
                     clearTimeout(id);
                 };
             } else {
-                alert("서버에서 잘못된 응답이 전송되었습니다! 로그인 멈춰!");
-                return;
+                alert(userInfo.result);
             }
         } catch (e) {
             console.log(e);
         }
-    };
-
-    const forceToLogin = () => {
-        setPhoto(
-            "https://static.wikia.nocookie.net/powerpuff/images/d/d2/Bubbles_HD.png"
-        );
-        setNickname("버블스");
-        console.log(nickname);
-        console.log(photo);
-        localStorage.setItem(
-            "photo",
-            "https://static.wikia.nocookie.net/powerpuff/images/d/d2/Bubbles_HD.png"
-        );
-        localStorage.setItem("nickname", "버블스");
-        setTimeout(() => {
-            navigate("/");
-        }, 500);
     };
 
     return (
@@ -171,17 +173,6 @@ const SignIn = () => {
                 }}
             >
                 Sign Up
-            </Button>
-            {/* 화면만들기 및 테스트용 */}
-            <Button
-                variant="contained"
-                sx={{ position: "absolute", left: 0, top: 0, m: 2 }}
-                onClick={(e) => {
-                    forceToLogin();
-                    navigate("/");
-                }}
-            >
-                강제인증
             </Button>
         </Container>
     );
