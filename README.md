@@ -10,11 +10,10 @@
 
 
 <br><br>
-
+<!-- 
 ![downloads](https://img.shields.io/npm/dt/MOODMOOD)
 [![hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fohbyul&count_bg=%237A7A7A&title_bg=%23FFADCC&icon_color=%23FF0000&title=hits&edge_flat=false)](https://kdt-gitlab.elice.io/002-part3-nlp/team2/nlp-project-team2)
-![followers](https://img.shields.io/github/followers/ohbyul?style=social)
-<!-- <br>
+![followers](https://img.shields.io/github/followers/ohbyul?style=social) 
 ![codesize](https://img.shields.io/github/languages/code-size/beygee/survive)
 ![reposize](https://img.shields.io/github/repo-size/beygee/survive) -->
 
