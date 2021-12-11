@@ -21,6 +21,11 @@ def create_article():
     text = request.json["text"]
     date = request.json["date"]
 
+    origin_diary = Article.query.filter((Article.date == date) & (Article.author_id == g.user.id)).first()
+    if origin_diary:
+        db.session.close()
+        return jsonify(result='해당 날짜에 일기가 이미 존재합니다')
+
     emotion, slang = analysis_result(text)
     is_sharable = slang
     is_shared = True  # 원래 서비스 상으로는 처음 작성 시 default는 비공개(False)
@@ -39,6 +44,8 @@ def get_article(date):
         (Article.date == date) & (Article.author_id == g.user.id)
     ).first()
     db.session.close()
+    if not diary:
+        return jsonify(result='해당 날짜에 일기가 없습니다')
     return jsonify(
         date=diary.date.strftime("%Y-%m-%d"),
         text=diary.text,

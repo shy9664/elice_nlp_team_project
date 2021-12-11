@@ -17,6 +17,7 @@ class Article(db.Model):
 
     def __init__(self, author, author_id, text, date, emotion, is_sharable, is_shared):
         self.author = author
+        self.author_id = author_id
         self.text = text
         self.date = date
         self.emotion = emotion
