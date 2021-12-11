@@ -15,47 +15,6 @@ import DiaryListDropdown, {
     UnicodeEmoMap,
 } from "../components/DiaryListDropdown";
 
-const mockups = [
-    {
-        date: "2021-11-15",
-        text: "안녕",
-        emotion: "\u{1F601}",
-        article_id: true,
-        symped: true,
-        num: 42,
-    },
-    {
-        date: "2021-11-16",
-        text: "하세요",
-        emotion: "\u{1F603}",
-        article_id: true,
-        symped: true,
-        num: 79,
-    },
-    {
-        date: "2021-11-17",
-        text: "으윽!",
-        emotion: "\u{1F602}",
-        article_id: false,
-        num: 10,
-    },
-    {
-        date: "2021-11-18",
-        text: "잘자라!",
-        emotion: "\u{1F604}",
-        article_id: false,
-        symped: true,
-        num: 88,
-    },
-    {
-        date: "2021-11-19",
-        text: "쿠쿠!",
-        emotion: "\u{1F605}",
-        article_id: false,
-        num: 12,
-    },
-];
-
 const NumHeart = ({ symped, num }) => {
     return (
         <IconButton>
@@ -75,9 +34,8 @@ const NumHeart = ({ symped, num }) => {
 
 const OpenBoard = () => {
     const [diaries, setDiaries] = useState([]);
-    const [immuDiaries, setImmuDiaries] = useState([...mockups].reverse());
+    const [immuDiaries, setImmuDiaries] = useState([]);
     const [fromOld, setFromOld] = useState(false);
-    const [sympOrder, setSympOrder] = useState(false);
     const [emotionFilter, setEmotionFilter] = useState("all");
     useEffect(() => {
         console.log("글 받아오기");
@@ -85,8 +43,9 @@ const OpenBoard = () => {
             try {
                 const data = await readBoard();
                 console.log(data);
+                setImmuDiaries(data)
                 setDiaries(data);
-                // setDiaries(data); 오류가 나서 임시로 막아뒀습니다 서버 연결 후 풀어봐야할듯..?
+
             } catch (e) {
                 console.log(e);
             }
@@ -94,26 +53,18 @@ const OpenBoard = () => {
         fetchData();
     }, []);
     useEffect(() => {
-        if (sympOrder) {
-            // if (fromOld) {
-            //     setDiaries(mockups.filter((diary) => diary));
-            // } else {
-            //     setDiaries(mockups.filter((diary) => diary).reverse());
-            // }
-        } else {
             if (fromOld) {
                 setDiaries(immuDiaries);
             } else {
                 setDiaries([...immuDiaries].reverse());
             }
-        }
-    }, [sympOrder, fromOld, immuDiaries]);
+    }, [fromOld]);
 
     return (
         <BasicLayout>
             <Grid item xs={12}>
                 <Box>
-                    <InputLabel id="emotion-select-label">감정</InputLabel>
+                    {/* <InputLabel id="emotion-select-label">감정</InputLabel> */}
                     <DiaryListDropdown
                         emotionFilter={emotionFilter}
                         setEmotionFilter={setEmotionFilter}
