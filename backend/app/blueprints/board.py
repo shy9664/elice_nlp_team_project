@@ -63,4 +63,5 @@ def get_sympathized_article():
     for sorted_sympathized_article in sorted_sympathized_articles:
         filtered_and_sorted_articles.append(sorted_sympathized_article[0])
 
+    db.session.close()
     return jsonify(filtered_and_sorted_articles)
