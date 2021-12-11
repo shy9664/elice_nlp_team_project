@@ -16,8 +16,8 @@ const pagesInfo = [
     {
         text: "일기 쓰기",
         url: "/diary/write",
-        color: "#dddddd",
-        backColor: "#560027",
+        color: "#70555B",
+        backColor: "#F0B7C2",
     },
     {
         text: "목록",
@@ -114,9 +114,9 @@ const Sidebar = () => {
                                 sx={
                                     pInfo.color
                                         ? {
-                                              color: pInfo.color,
-                                              backgroundColor: pInfo.backColor,
-                                          }
+                                                color: pInfo.color,
+                                                backgroundColor: pInfo.backColor,
+                                            }
                                         : undefined
                                 }
                             >

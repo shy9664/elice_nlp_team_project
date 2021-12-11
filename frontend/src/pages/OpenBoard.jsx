@@ -85,7 +85,7 @@ const OpenBoard = () => {
             try {
                 const data = await readBoard();
                 console.log(data);
-                // setDiaries(data);
+                setDiaries(data);
                 // setDiaries(data); 오류가 나서 임시로 막아뒀습니다 서버 연결 후 풀어봐야할듯..?
             } catch (e) {
                 console.log(e);
