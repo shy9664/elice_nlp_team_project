@@ -5,31 +5,31 @@ import getUrl from "./getUrl";
  * 글 작성
  *
  * @param writeData  {{text: string, date: number}}  콘텐츠 데이터
- * @returns
+ * @returns {{config: any, data: {result: 'string'}, headers: any, request: any, status: number, statusText: string}} responseobject
  */
 export const createArticle = async (writeData) => {
     const url = getUrl(`/api/article`);
     try {
         console.log(writeData);
         const response = await axios.post(url, writeData);
-        return response.data;
+        return response;
     } catch (e) {
         console.log(e);
     }
 };
 
 /**
- * 글 수정 (백엔드 오류나는 것 같은데 datetype 이 integer..가 맞나요)
+ * 글 수정
  *
  * @param {string} date
  * @param {string} writeData
- * @returns
+ * @returns {{config: any, data: {result: 'string'}, headers: any, request: any, status: number, statusText: string}}  response object
  */
 export const updateArticle = async (date, writeData) => {
     const url = getUrl(`/api/article/${date}`);
     try {
         const response = await axios.patch(url, { text: writeData });
-        return response.data;
+        return response;
     } catch (e) {
         console.log(e);
     }

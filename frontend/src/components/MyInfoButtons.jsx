@@ -2,28 +2,19 @@
 import React from "react";
 import { useNavigate } from "react-router";
 import { useRecoilState } from "recoil";
-import {
-    photo as ptatom,
-    nickname as nkatom,
-    password as pwatom,
-} from "../recoils/userInfo";
+import { nickname as nkatom, password as pwatom } from "../recoils/userInfo";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { updateUser } from "../apis/user";
 
 const MyInfoButtons = () => {
     const [nickname, setNickname] = useRecoilState(nkatom);
-    const [photo, setPhoto] = useRecoilState(ptatom);
     const [pw, setPw] = useRecoilState(pwatom);
     const navi = useNavigate();
     const revise = async () => {
-        console.log("로컬스토리지: 수정하였습니다.");
-        localStorage.setItem("nickname", nickname);
-        localStorage.setItem("photo", photo);
-
         try {
             const res = await updateUser({
-                photo: photo,
+                nickname: nickname,
                 password: pw,
                 password_check: pw,
             });
@@ -46,6 +37,7 @@ const MyInfoButtons = () => {
             >
                 <Typography>홈으로</Typography>
             </Button>
+
             <Button
                 onClick={() => revise()}
                 variant="contained"

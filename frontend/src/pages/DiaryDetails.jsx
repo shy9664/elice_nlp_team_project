@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useRecoilState } from "recoil";
 import {
@@ -28,6 +28,7 @@ const DiaryDetails = () => {
     const [withAnony, setWithAnony] = useRecoilState(isatom);
     const [emotion, setEmotion] = useRecoilState(emoatom);
     const [sharability, setSharability] = useRecoilState(isSharable);
+    const [content, setContent] = useState("");
 
     const yearStr = date.getFullYear();
     const monthNum = date.getMonth() + 1;
@@ -41,6 +42,7 @@ const DiaryDetails = () => {
         const fetchData = async () => {
             const article = await readArticle(otherNumDate);
             setSharability(article.is_sharable);
+            setContent(article.text);
         };
         try {
             fetchData();
@@ -101,7 +103,7 @@ const DiaryDetails = () => {
                     elevation={5}
                 >
                     <Typography variant="h4">{`${yearStr}년 ${monthNum}월 ${dateNum}일`}</Typography>
-                    <ReadonlyEditor selectedDate={numDate} id={numDate} />
+                    <ReadonlyEditor content={content} id={numDate} />
                 </Paper>
             </Grid>
             <Grid

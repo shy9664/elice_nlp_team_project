@@ -12,9 +12,17 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Logo from "../components/Logo";
 import signup from "../apis/signup";
+import signin from "../apis/signin";
+import { useRecoilState } from "recoil";
+import { photo as ptatom, nickname as nkatom } from "../recoils/userInfo";
 
 export default function SignUp() {
+    // 네비게이트 훅
     const navi = useNavigate();
+    // 리코일 전역 스테이트들
+    const [nickname, setNickname] = useRecoilState(nkatom);
+    const [photo, setPhoto] = useRecoilState(ptatom);
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -25,9 +33,44 @@ export default function SignUp() {
             nickname: data.get("nickname"),
         };
         try {
+            // 회원가입 시도
             const response = await signup(jsonData);
-            console.log(response);
-            navi("/");
+            console.log(response.status); // 회원가입 성공 여부
+
+            // 회원가입 성공 시
+            if (response.status === 200) {
+                // 로그인 요청보내기
+                const userInfo = await signin(jsonData);
+
+                // 요청에 대한 응답
+                console.log(userInfo);
+
+                //데이터 객체 자체가 오지 않았을 경우
+                if (!userInfo) {
+                    alert("잘못된 응답!");
+                    return;
+                }
+                const p = userInfo.photo;
+                const n = userInfo.nickname;
+
+                // status 코드가 200으로 일괄 세팅되기 때문에 응답으로 오는 데이터를 판단
+                if (p && n) {
+                    // 포토 부분과 닉네임 넣어주기
+                    const p = userInfo.photo;
+                    const n = userInfo.nickname;
+
+                    // recoil 전체 state 업데이트
+                    setPhoto(p);
+                    setNickname(n);
+
+                    //그냥 navigate
+                    navi("/");
+                } else {
+                    alert(userInfo.data.result);
+                }
+            } else {
+                alert("성공적인 회원가입이 안되었습니다!");
+            }
         } catch (e) {
             console.log(e);
         }

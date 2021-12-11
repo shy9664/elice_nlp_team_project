@@ -17,21 +17,6 @@ const Main = () => {
     const [photo, setPhoto] = useRecoilState(ptatom);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const p = localStorage.getItem("photo");
-        const ni = localStorage.getItem("nickname");
-
-        if (p && ni) {
-            setPhoto(p);
-            setNickname(ni);
-            console.log(nickname);
-            console.log(photo);
-            return;
-        }
-        navigate("/signin");
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
     return (
         <BasicLayout>
             <Grid item xs={12} md={6} lg={5}>

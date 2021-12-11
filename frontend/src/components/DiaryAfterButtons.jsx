@@ -59,32 +59,10 @@ const DiaryAfterButtons = () => {
         }
 
         try {
+            // 공유하기 시도하기
             await updateIsShared(otherNumDate, !withAnony ? 1 : 0);
         } catch (e) {
             console.log(e);
-        }
-
-        // 로컬 내부
-        const prev = localStorage.getItem("diaryContents") || "[]";
-        const prevList = JSON.parse(prev);
-        const one = prevList.filter((ele) => ele.date === numDate)[0];
-        if (one) {
-            const newOne = {
-                ...one,
-                is_shared: !withAnony,
-                emotion: emotion,
-            };
-
-            // 새글 정보
-            console.log(newOne);
-
-            const nowList = prevList.filter((ele) => ele.date !== numDate);
-            nowList.push(newOne);
-            nowList.sort((f, s) => {
-                return f.date > s.date ? -1 : 1;
-            });
-            const nowStr = JSON.stringify(nowList);
-            localStorage.setItem("diaryContents", nowStr);
         }
     };
 
@@ -101,11 +79,6 @@ const DiaryAfterButtons = () => {
         } catch (e) {
             console.log(e);
         }
-        localStorage.removeItem(numDate);
-        const prev = localStorage.getItem("diaryContents") || "[]";
-        const prevList = JSON.parse(prev);
-        const nowList = prevList.filter((ele) => ele.date !== numDate);
-        localStorage.setItem("diaryContents", JSON.stringify(nowList));
         navi("/");
     };
 

@@ -10,6 +10,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { Typography } from "@mui/material";
 import MyInfoButtons from "./MeButtons";
+import { readUser } from "../apis/user";
 
 const pagesInfo = [
     {
@@ -44,16 +45,25 @@ const Sidebar = () => {
     };
 
     useEffect(() => {
-        const p = localStorage.getItem("photo");
-        const ni = localStorage.getItem("nickname");
-
-        if (p && ni) {
-            setPhoto(p);
-            setNickname(ni);
-            return;
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        const fetchData = async () => {
+            try {
+                const userInfo = await readUser();
+                const n = userInfo.nickname;
+                const p = userInfo.photo;
+                if (n && p) {
+                    setNickname(n);
+                    setPhoto(
+                        `${process.env.PUBLIC_URL}/images/default-profile.png"`
+                    );
+                } else {
+                    alert("잘못된 접근!");
+                    navi("/signin");
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        };
+        fetchData();
     }, []);
 
     return (
