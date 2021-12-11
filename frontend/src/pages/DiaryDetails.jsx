@@ -6,6 +6,7 @@ import {
     isAnony as isatom,
     emotion as emoatom,
     isSharable,
+    isAnony,
 } from "../recoils/diary";
 
 import Grid from "@mui/material/Grid";
@@ -28,6 +29,7 @@ const DiaryDetails = () => {
     const [withAnony, setWithAnony] = useRecoilState(isatom);
     const [emotion, setEmotion] = useRecoilState(emoatom);
     const [sharability, setSharability] = useRecoilState(isSharable);
+    const [isPrivate, setIsPrivate] = useRecoilState(isAnony);
     const [content, setContent] = useState("");
 
     const yearStr = date.getFullYear();
@@ -41,17 +43,19 @@ const DiaryDetails = () => {
     useEffect(() => {
         const fetchData = async () => {
             const article = await readArticle(otherNumDate);
-            setSharability(article.is_sharable);
-            setContent(article.text);
+
+            // 지금 이 글에 대하여...
+            setSharability(article.is_sharable); // 공유가능함?
+            setEmotion(article.emotion); // 감정은?
+            setIsPrivate(!article.is_shared); // 공유여부는?
+            setContent(article.text); // 내용은?
         };
+
         try {
             fetchData();
         } catch (e) {
             console.log(e);
-            alert(
-                "Warning: 공유가능여부가 무시되었습니다! 무조건 공유가 가능하게 됩니다."
-            );
-            setSharability(true);
+            alert("Error: 글 정보를 제대로 받아오지 못하였습니다!");
         }
     }, []);
 
@@ -103,7 +107,9 @@ const DiaryDetails = () => {
                     elevation={5}
                 >
                     <Typography variant="h4">{`${yearStr}년 ${monthNum}월 ${dateNum}일`}</Typography>
-                    <ReadonlyEditor content={content} id={numDate} />
+                    {content && (
+                        <ReadonlyEditor content={content} id={numDate} />
+                    )}
                 </Paper>
             </Grid>
             <Grid

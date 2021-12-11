@@ -4,13 +4,7 @@ import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { usePlateValue } from "@udecode/plate-core";
 import Button from "@mui/material/Button";
-import {
-    dateAtom,
-    emotion as emoatom,
-    isAnony,
-    isSharable,
-    isUpdateNow,
-} from "../recoils/diary";
+import { dateAtom, isUpdateNow } from "../recoils/diary";
 import { createArticle, readArticle, updateArticle } from "../apis/article";
 import { UnicodeEmoMap } from "./DiaryListDropdown";
 
@@ -19,9 +13,6 @@ const DiaryWriteButtons = () => {
     const navi = useNavigate();
     const [date, setDate] = useRecoilState(dateAtom);
     const [isUpdating, setIsUpdating] = useRecoilState(isUpdateNow);
-    const [sharability, setSharability] = useRecoilState(isSharable);
-    const [isPrivate, setIsPrivate] = useRecoilState(isAnony);
-    const [emotion, setEmotion] = useRecoilState(emoatom);
 
     const cancel = () => {
         console.log("글쓰기 취소");
@@ -47,12 +38,18 @@ const DiaryWriteButtons = () => {
         localStorage.setItem(numDate, contentString);
 
         try {
-            // 처음에 이미 작성된 글이 있는지 확인
-            const res = await readArticle(otherNumDate);
+            // 일단 무지성으로 글을 씀
+            const response = await createArticle({
+                text: contentString,
+                date: Number(otherNumDate),
+            });
+            if (!response || response.status !== 200) {
+                alert("글 작성 및 업데이트가 정상적으로 처리되지 않음!");
+                return;
+            }
 
             // 글이 있으면 새로 쓰는게 아니라 업데이트를 콜해야함
-            if (res) {
-                // 업데이트면 셋해줌
+            if (response.data.result !== "success") {
                 setIsUpdating(true);
             } else {
                 setIsUpdating(false);
@@ -69,33 +66,10 @@ const DiaryWriteButtons = () => {
                     alert("글 업데이트가 정상적으로 처리되지 않음!");
                     return;
                 }
-            } else {
-                const response = await createArticle({
-                    text: contentString,
-                    date: Number(otherNumDate),
-                });
-                if (!response || response.status !== 200) {
-                    alert("글 작성 및 업데이트가 정상적으로 처리되지 않음!");
-                    return;
-                }
             }
             console.log("글 작성 및 업데이트 됨.");
 
-            // 감정설정까지 완료되어서 해당 글을 다시 받음
-            const resAgain = await readArticle(otherNumDate);
-
-            if (!resAgain || !resAgain.date) {
-                alert(
-                    "글 다시 받아오는 과정에서 문제가 생김! 다시 제출해주세요!"
-                );
-            }
-
-            // 지금 이 글에 대하여...
-            setSharability(resAgain.is_sharable); // 공유가능함?
-            setEmotion(resAgain.emotion); // 감정은?
-            setIsPrivate(!resAgain.is_shared); // 공유여부는?
-
-            // 모든 작업이 끝났으므로 상세페이지로
+            // 작업이 끝났으므로 일단은 상세페이지로
             navi("/diary/done");
         } catch (e) {
             console.log(e);
