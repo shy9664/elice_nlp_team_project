@@ -38,34 +38,11 @@ const DiaryListDropdown = ({ emotionFilter, setEmotionFilter, isNoAll }) => {
                 sx={{ minWidth: 200, mr: 2 }}
             >
                 {!isNoAll && <MenuItem value={"all"}>All</MenuItem>}
-                <MenuItem value={"neutrality"}>
-                    {"\u{1F601}"}
-                    {" 보통"}
-                </MenuItem>
-                <MenuItem value={"fear"}>
-                    {"\u{1F628}"}
-                    {" 공포"}
-                </MenuItem>
-                <MenuItem value={"happiness"}>
-                    {"\u{1F603}"}
-                    {" 행복"}
-                </MenuItem>
-                <MenuItem value={"surprise"}>
-                    {"\u{1F62E}"}
-                    {" 놀람"}
-                </MenuItem>
-                <MenuItem value={"anger"}>
-                    {"\u{1F620}"}
-                    {" 분노"}
-                </MenuItem>
-                <MenuItem value={"sadness"}>
-                    {"\u{1F61E}"}
-                    {" 슬픔"}
-                </MenuItem>
-                <MenuItem value={"disgust"}>
-                    {"\u{1F922}"}
-                    {" 혐오"}
-                </MenuItem>
+                {Object.keys(UnicodeEmoMap).map((emoKey) => {
+                    <MenuItem key={emoKey} value={emoKey}>
+                        {`${UnicodeEmoMap[emoKey]} ${emoKey}`}
+                    </MenuItem>;
+                })}
             </Select>
         </>
     );
