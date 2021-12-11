@@ -81,7 +81,7 @@ const OpenBoard = () => {
                         }
                         label="오래된것부터보기"
                     />
-                    <FormControlLabel
+                    {/* <FormControlLabel
                         control={
                             <Checkbox
                                 value={sympOrder}
@@ -91,7 +91,7 @@ const OpenBoard = () => {
                             />
                         }
                         label="공감 많은순"
-                    />
+                    /> */}
                 </Box>
             </Grid>
             <Grid item xs={12} sx={{ maxHeight: 630, overflow: "scroll" }}>
