@@ -13,6 +13,7 @@ const theme = createTheme({
             main: "#992E82",
             light: "#F5B8C6",
             dark: "#F4F0FF",
+            etc: "#b56dca"
 
         },
         error: {
