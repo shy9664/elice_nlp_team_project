@@ -3,6 +3,7 @@ from flask import Blueprint, json, jsonify, request
 from models.article import Article
 from models.sympathy import Sympathy
 
+from app import db
 
 open_board = Blueprint("open_board", __name__, url_prefix="/api/board")
 
@@ -55,6 +56,7 @@ def open_bulletin_board():
     for sorted_many_sympathy in sorted_many_sympathies:
         sorted_diary.append(sorted_many_sympathy[0])
 
+    db.session.close()
     return jsonify(sorted_diary)
 
 
@@ -62,10 +64,12 @@ def open_bulletin_board():
 def someone_diary(id):
     diary = Article.query.filter(Article.id == id).first()
     user = diary.user
+    sympathy_count = len(Sympathy.query.filter(Sympathy.article_id == id).all())
+    db.session.close()
     return jsonify(
         date=diary.date.strftime("%Y-%m-%d"),
         emotion=diary.emotion,
-        sympathy=len(Sympathy.query.filter(Sympathy.article_id == id).all()),
+        sympathy=sympathy_count,
         text=diary.text,
         photo=user.photo,
         nickname=user.nickname,

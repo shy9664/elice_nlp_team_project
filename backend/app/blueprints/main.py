@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify, session, g
 from models.article import Article
 from models.user import User
+from app import db
 
 from datetime import datetime
 
@@ -31,4 +32,6 @@ def main_info():
         one_diary['text'] = diary.text
         one_diary['emotion'] = diary.emotion
         year_month_diarys.append(one_diary)
+    
+    db.session.close()
     return jsonify(year_month_diarys)

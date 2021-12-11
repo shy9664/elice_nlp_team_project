@@ -130,4 +130,5 @@ def get_my_diarys():
         one_diary["emotion"] = diary.emotion
         one_diary["is_shared"] = diary.is_shared
         my_diarys.append(one_diary)
+    db.session.close()
     return jsonify(my_diarys)
