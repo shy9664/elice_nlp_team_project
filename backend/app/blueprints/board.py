@@ -27,7 +27,15 @@ def delete_sympathy(article_id, sympathize):
 def get_sympathized_article():
     emotion = request.args.get('emotion')
     if not emotion or emotion == 'all':
-        emotion = ['joy', 'anger']  # 추후 감정 추가되는대로 다 집어넣기
+        emotion = [
+            "fear",
+            "surprise",
+            "anger",
+            "sadness",
+            "neutrality",
+            "happiness",
+            "disgust",
+        ]
     else:
         emotion = [emotion]
 

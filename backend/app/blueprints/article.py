@@ -109,7 +109,7 @@ def get_my_diarys():
             "neutrality",
             "happiness",
             "disgust",
-        ]  # 추후 감정 추가되는대로 다 집어넣기
+        ]
     else:
         emotion = [emotion]
     share_status = request.args.get("share", 0, type=int)
