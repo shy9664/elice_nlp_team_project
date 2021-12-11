@@ -18,6 +18,7 @@ from transformers import AdamW
 from transformers.optimization import get_cosine_schedule_with_warmup
 import re
 
+
 import config
 from env import secret_key
 
@@ -187,7 +188,6 @@ emotion_model = torch.load(
     "ai_models/emotion_model.pt", map_location=torch.device("cpu")
 )
 slang_model = torch.load("ai_models/slang_model.pt", map_location=torch.device("cpu"))
-
 
 def create_app():
     app = Flask(__name__)
