@@ -38,29 +38,33 @@ const DiaryListDropdown = ({ emotionFilter, setEmotionFilter, isNoAll }) => {
                 sx={{ minWidth: 200, mr: 2 }}
             >
                 {!isNoAll && <MenuItem value={"all"}>All</MenuItem>}
-                <MenuItem value={"smile"}>
+                <MenuItem value={"neutrality"}>
                     {"\u{1F601}"}
-                    {" 즐거움"}
+                    {" 보통"}
                 </MenuItem>
-                <MenuItem value={"normal"}>
+                <MenuItem value={"fear"}>
+                    {"\u{1F628}"}
+                    {" 공포"}
+                </MenuItem>
+                <MenuItem value={"happiness"}>
                     {"\u{1F603}"}
-                    {" 평이"}
-                </MenuItem>
-                <MenuItem value={"happy"}>
-                    {"\u{1F604}"}
                     {" 행복"}
                 </MenuItem>
-                <MenuItem value={"funny"}>
-                    {"\u{1F606}"}
-                    {" 재밌음"}
+                <MenuItem value={"surprise"}>
+                    {"\u{1F62E}"}
+                    {" 놀람"}
                 </MenuItem>
-                <MenuItem value={"sad"}>
+                <MenuItem value={"anger"}>
+                    {"\u{1F620}"}
+                    {" 분노"}
+                </MenuItem>
+                <MenuItem value={"sadness"}>
                     {"\u{1F61E}"}
                     {" 슬픔"}
                 </MenuItem>
-                <MenuItem value={"angry"}>
-                    {"\u{1F620}"}
-                    {" 분노"}
+                <MenuItem value={"disgust"}>
+                    {"\u{1F922}"}
+                    {" 혐오"}
                 </MenuItem>
             </Select>
         </>
