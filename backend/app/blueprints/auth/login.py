@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify, session
 from werkzeug.security import check_password_hash
 from models.user import User
+from app import db
 
 login = Blueprint("login", __name__, url_prefix='/api')
 
@@ -19,4 +20,5 @@ def user_login():
     session.clear()
     session['login_user_id'] = login_user.id
 
+    db.session.close()
     return jsonify(photo = login_user.photo, nickname = login_user.nickname)

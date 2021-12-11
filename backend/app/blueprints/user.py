@@ -24,7 +24,8 @@ def load_logged_in_user_info():
 @user.route('/user', methods=['GET'])
 def get_user_info():
     user = User.query.filter(User.id == g.user.id).first()
-    return jsonify(email = user.email, nickname = user.nickname)
+    db.session.close()
+    return jsonify(photo = user.photo, email = user.email, nickname = user.nickname)
 
 @user.route('/user', methods=['PATCH'])
 def update_user_info():
