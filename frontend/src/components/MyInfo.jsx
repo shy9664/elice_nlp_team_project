@@ -81,7 +81,7 @@ const MyInfo = () => {
                 label="비밀번호"
                 variant="filled"
                 value={pw}
-                onChange={() => setPw()}
+                onChange={(e) => setPw(e.target.value)}
             />
             <TextField
                 type="password"
@@ -89,7 +89,7 @@ const MyInfo = () => {
                 label="비밀번호 확인"
                 variant="filled"
                 value={pwRt}
-                onChange={() => setPwRt()}
+                onChange={(e) => setPwRt(e.target.value)}
             />
         </Box>
     );
