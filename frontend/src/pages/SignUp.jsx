@@ -35,7 +35,7 @@ export default function SignUp() {
                 // 로그인 페이지로 가기
                 navi("/signin");
             } else {
-                alert("성공적인 회원가입이 안되었습니다!");
+                alert("성공적인 회원가입이 되지 않았습니다!");
             }
         } catch (e) {
             console.log(e);

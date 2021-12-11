@@ -26,6 +26,16 @@ export const UnicodeEmoMap = {
     disgust: "\u{1F922}",
 };
 
+const KoreanEmoMap = {
+    neutrality: "평이",
+    fear: "공포",
+    happiness: "행복",
+    surprise: "놀람",
+    anger: "화남",
+    sadness: "슬픔",
+    disgust: "혐오",
+};
+
 const DiaryListDropdown = ({ emotionFilter, setEmotionFilter, isNoAll }) => {
     return (
         <>
@@ -38,11 +48,11 @@ const DiaryListDropdown = ({ emotionFilter, setEmotionFilter, isNoAll }) => {
                 sx={{ minWidth: 200, mr: 2 }}
             >
                 {!isNoAll && <MenuItem value={"all"}>All</MenuItem>}
-                {Object.keys(UnicodeEmoMap).map((emoKey) => {
+                {Object.keys(UnicodeEmoMap).map((emoKey) => 
                     <MenuItem key={emoKey} value={emoKey}>
-                        {`${UnicodeEmoMap[emoKey]} ${emoKey}`}
-                    </MenuItem>;
-                })}
+                        {`${UnicodeEmoMap[emoKey]} ${KoreanEmoMap[emoKey]}`}
+                    </MenuItem>
+                )}
             </Select>
         </>
     );
