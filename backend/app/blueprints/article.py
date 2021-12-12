@@ -28,7 +28,7 @@ def create_article():
 
     emotion, slang = analysis_result(text)
     is_sharable = slang
-    is_shared = True  # 원래 서비스 상으로는 처음 작성 시 default는 비공개(False)
+    is_shared = False
 
     new_diary = Article(
         g.user.nickname, g.user.id, text, date, emotion, is_sharable, is_shared
