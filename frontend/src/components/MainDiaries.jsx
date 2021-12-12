@@ -49,7 +49,7 @@ const MainDiaries = () => {
     };
     return (
         <>
-            <Typography variant="h4">{fullDateString}</Typography>
+            <Typography variant="h5">{fullDateString}</Typography>
             {contentData === "loading" ? (
                 <Box sx={{ height: 200 }}></Box>
             ) : contentData ? (
@@ -71,3 +71,8 @@ const MainDiaries = () => {
 };
 
 export default MainDiaries;
+
+
+// sx={{
+//                             backgroundColor: "#eeeeee",
+//                         }}

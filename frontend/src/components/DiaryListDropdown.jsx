@@ -27,7 +27,7 @@ export const UnicodeEmoMap = {
 };
 
 const KoreanEmoMap = {
-    neutrality: "평이",
+    neutrality: "보통",
     fear: "공포",
     happiness: "행복",
     surprise: "놀람",
@@ -45,7 +45,7 @@ const DiaryListDropdown = ({ emotionFilter, setEmotionFilter, isNoAll }) => {
                 id="emotion-select"
                 value={emotionFilter}
                 onChange={(e) => setEmotionFilter(e.target.value)}
-                sx={{ minWidth: 200, mr: 2 }}
+                sx={{ minWidth: 200, mr: 2, height: 40 , bottom:2}}
             >
                 {!isNoAll && <MenuItem value={"all"}>All</MenuItem>}
                 {Object.keys(UnicodeEmoMap).map((emoKey) => 
