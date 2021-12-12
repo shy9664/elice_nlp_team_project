@@ -130,7 +130,10 @@ const SympDiaryList = () => {
                             <Typography variant="h6">
                                 {diary.date} {diary.emotion}
                             </Typography>
-                            <Typography variant="body1">
+                            <Typography variant="body1"
+                                sx={{
+                                    mr: 5,
+                                }}>
                                 {diary.text}
                             </Typography>
                             <Box
