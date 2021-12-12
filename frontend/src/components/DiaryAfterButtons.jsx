@@ -184,13 +184,13 @@ const DiaryAfterButtons = () => {
                             <Typography sx={{ mb: 4 }} variant="h5">
                                 공유하시겠습니까?
                             </Typography>
-                            <Checkbox
+                            {/* <Checkbox
                                 checked={withAnony}
                                 onChange={() => setWithAnony(!withAnony)}
                             />
                             <Typography sx={{ mb: 4 }} variant="h6">
                                 익명으로 공유하기
-                            </Typography>
+                            </Typography> */}
                             <Box
                                 sx={{
                                     display: "flex",
@@ -212,7 +212,7 @@ const DiaryAfterButtons = () => {
                                         setIsModalOpened(false);
                                     }}
                                 >
-                                    싫어
+                                    다음에
                                 </Button>
                             </Box>
                         </>

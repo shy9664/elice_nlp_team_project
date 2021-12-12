@@ -33,6 +33,7 @@ const Main = () => {
                         alignItems: "center",
                         justifyContent: "center",
                         flexDirection: "column",
+                        
                     }}
                     elevation={3}
                 >
