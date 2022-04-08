@@ -7,7 +7,7 @@ env.py
 node_modules
 .DS_Store
 
-*.pt
+.pt
 
 # for VM 
 .requirements.txt
